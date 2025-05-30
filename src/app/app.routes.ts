@@ -7,7 +7,7 @@ import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+// import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent }, 

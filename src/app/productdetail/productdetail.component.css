@@ -1,5 +1,6 @@
 #rootContainer{
     display: flex;
+    margin-top: 80px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -118,7 +119,7 @@
 #backbutton{
     width:40px;
     height:40px;
-    position:absolute;
+    position:fixed;
     top: 100px;
     left:20px;
 }

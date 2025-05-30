@@ -43,6 +43,8 @@ export class AuthService {
         },
         error: (error) => {
           console.error('Registration Failed:', error); 
+          this.notification.ShowMessage("Registration Failed","bad",3000)
+
         }
       })
     );
@@ -72,6 +74,7 @@ export class AuthService {
       tap(response => console.log("Cart API Response:", response)),
       catchError(error => {
         console.error("Cart API Error:", error);
+        this.notification.ShowMessage("You need to Login","bad",3000)
         return throwError(() => error);
       })
     );

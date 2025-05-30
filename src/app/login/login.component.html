@@ -1,13 +1,17 @@
 <!-- <app-header></app-header> -->
- <div class="LoginContainer">
-  <div class="login-page">
-    <h2>Login</h2>
-    <input type="email" [(ngModel)]="email" placeholder="Enter email" required />
-    <input type="password" [(ngModel)]="password" placeholder="Enter password" required />
-    <button (click)="login()">Login</button>
-    <p class="register-link">New here? <a (click)="navigateToRegister()" class="text-primary fw-bold">Register Now</a></p>
-    <a routerLink="/Home" id="skipForNow">Skip for Now</a>
-
+<span id="backbutton">
+  <img id="backimage" src="arrow-left-svgrepo-com.svg" [routerLink]="'profile/'" alt="back">
+</span>
+ <div class="LoginPageContainer">
+  <div class="LoginBox">
+    <h2 id="loginheading">Login</h2>
+    <div class="inputDiv">
+        <input class="EmailInput" type="email" [(ngModel)]="email" placeholder="Enter your email" required />
+        <input class="PasswordInput" type="password" [(ngModel)]="password" placeholder="Enter your password" required />
+        <button (click)="login()">Login</button>
+    </div>
+    <p class="NewHere">New here? <a (click)="navigateToRegister()" class="RegisterLink">Register Now</a></p>
+    <!-- <a routerLink="/Home" id="skipForNow">Skip for Now</a> -->
   </div>
  </div>
 

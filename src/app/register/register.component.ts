@@ -13,7 +13,7 @@ import { NotificationService } from '../services/notification.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-      Fullname = '';
+      Fullname = ''; 
       Address ='';
       email = '';
       password = '';
@@ -36,7 +36,7 @@ export class RegisterComponent {
           },
           error =>{
             console.error('Registration failed', error);
-            this.notification.ShowMessage("Registration failed","good",3000);
+            this.notification.ShowMessage(`Registration failed ${error.message}`,"bad",3000);
 
             // alert('Registration failed');
           }

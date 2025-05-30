@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -8,13 +8,20 @@ import { NotificationService } from '../services/notification.service';
 @Component({
   standalone: true,
   selector: 'app-header',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   location = '';
+
+  // search 
+  searchResults : any[] = [];
+  searchTerm = '';
+  NoProductsFound = false;
+
+
   constructor(private authService: AuthService, 
     private router: Router,
   private notification : NotificationService) {}
@@ -50,7 +57,7 @@ export class HeaderComponent implements OnInit {
   navigateToProfile()
   {
     if (!this.authService.isAuthenticated()) {
-      this.notification.ShowMessage("Please Log In to Access","good",3000);
+      this.notification.ShowMessage("Please Log In to Access","bad",3000);
       // alert("Please log in to access your profile.");
       return;
     }
@@ -68,14 +75,14 @@ export class HeaderComponent implements OnInit {
         },
         (error) => {
           console.error('Error getting location:', error);
-          this.notification.ShowMessage("Unable to fetch location. Please enable GPS.","good",3000);
+          this.notification.ShowMessage("Unable to fetch location. Please enable GPS.","bad",3000);
 
           // alert('Unable to fetch location. Please enable GPS.');
         }
       );
     } else {
       // alert('Geolocation is not supported by your browser.');      
-      this.notification.ShowMessage("Geolocation is not supported by your browser.","good",3000);
+      this.notification.ShowMessage("Geolocation is not supported by your browser.","bad",3000);
 
     }
   }
@@ -86,21 +93,62 @@ export class HeaderComponent implements OnInit {
     fetch(url)
       .then(response => response.json())
       .then(data => {
+        console.log("response data",data);
         if (data.features.length > 0) {
           this.location = data.features[0].properties.formatted; 
         } else {
           //console.error('No address found');
           // alert('Unable to fetch address.');      
-          this.notification.ShowMessage("Unable to fetch address.","good",3000);
+          this.notification.ShowMessage("Unable to fetch address.","bad",3000);
 
         }
       })
       .catch(error => {
         //console.error('Error fetching address:', error);
         // alert('Error fetching address.');
-        this.notification.ShowMessage("Error fetching address.","good",3000);
+        this.notification.ShowMessage("Error fetching address.","bad",3000);
 
       });
   }
-  
+
+
+  // serach method 
+  async OnSearchInput(event : any){
+    // this.searchTerm = query;
+    var query = event.target.value.trim();
+    // query=this.searchTerm;
+    if(!query)
+    {
+      this.searchResults = [];
+      return;
+    }
+
+    try{
+      const response = await fetch(`http://localhost:5156/api/Product/search?query=${encodeURIComponent(query)}`);
+      if(!response.ok)
+      {
+        throw new Error('Search failed');
+      }
+      else{
+        
+        var data = await response.json();
+        if(data.productfoundstatus == false)
+        {
+          // console.log("No products found .....");
+          this.NoProductsFound = true;
+          this.searchResults = [];
+        }
+        else{
+          this.NoProductsFound = false;
+          this.searchResults = data;
+          // console.log(this.searchResults);
+        }
+        
+      };
+    }
+    catch(err){
+      console.error(`Error : `, err);
+      this.searchResults = [];
+    }
+  }
 }

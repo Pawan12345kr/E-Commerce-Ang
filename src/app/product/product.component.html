@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div id="MasterContainer" style="padding:20px 50px">
+<div id="MasterContainer" style="padding:20px 50px; margin-top: 80px;">
 
   <div class="product_container">
     <!-- <h2>Product List</h2> -->
@@ -24,8 +24,8 @@
             </div>
         </div>
         
-        <div class="products_details_box" [routerLink]="'product/' + product.id">
-          <div class="product_details">
+        <div class="products_details_box" >
+          <div class="product_details" [routerLink]="'product/' + product.id">
             <h3 id="name">{{ product.name }}</h3>
             <p id="brand">{{ product.brand }}</p>
             <p id="price">₹{{ product.price }}</p>

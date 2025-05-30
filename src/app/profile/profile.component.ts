@@ -49,7 +49,7 @@ export class ProfileComponent {
     });
 
     if (!this.authService.isAuthenticated()) {      
-      this.notification.ShowMessage("You need to log in to view your profile!","good",3000);
+      this.notification.ShowMessage("You need to log in to view your profile!","bad",3000);
       // alert("You need to log in to view your profile!");
       return;
     }
@@ -70,14 +70,14 @@ export class ProfileComponent {
         if (response.success) {
           this.userInfo = response;
         } else {
-      this.notification.ShowMessage("User details not found.","good",3000);
+      this.notification.ShowMessage("User details not found.","bad",3000);
 
           // alert("User details not found.");
         }
       },
       error: (error) => {
         console.error("Error fetching user info:", error);
-      this.notification.ShowMessage("Failed to load user details.","good",3000);
+      this.notification.ShowMessage("Failed to load user details.","bad",3000);
 
         // alert("Failed to load user details.");
       }
@@ -104,7 +104,7 @@ export class ProfileComponent {
       },
       error: (error) => {
         console.error("Error fetching user orders:", error);
-        this.notification.ShowMessage("Failed to retrieve order history.","good",3000);
+        this.notification.ShowMessage("Failed to retrieve order history.","bad",3000);
 
         // alert("Failed to retrieve order history.");
       }

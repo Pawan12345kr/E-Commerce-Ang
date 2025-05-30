@@ -42,17 +42,36 @@
             </div>
         </div>
         
-        <div class="products_details_box" [routerLink]="['product/',product.id]">
-          <div class="product_details">
+        <div class="products_details_box" >
+          <div class="product_details" [routerLink]="['product/',product.id]">
             <h3 id="name">{{ product.name }}</h3>
             <p id="brand">{{ product.brand }}</p>
             <p id="price">₹{{ product.price }}</p>
           </div>
           <button class="AddTocartButton" (click)="addToCart(product.id)"> Add</button>
         </div>
-    
     </div>
   </div>
+</div>
+</div>
+
+
+<!-- 
+<div class="NotificationContainer">
+  <div class="headerfornotification">
+      
+      <span class="CloseContainer">
+        <img src="close.png" alt="">
+      </span>
+  </div>
+  <div class="ContentContainer">
+        <div class="statusimage">
+            <img src="tick.svg" alt="">
+        </div>
+        <div class="MessageContainer">
+          <h5 class="Title">Ubuy</h5>
+            <p class="Messages">message</p>
+        </div>
+  </div>
   
-</div>
-</div>
+</div> -->

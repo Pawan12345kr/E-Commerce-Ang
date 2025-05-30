@@ -29,7 +29,7 @@ export class LoginComponent {
         },
         error => {
           console.error('Login failed:', error);
-          this.notification.ShowMessage("Invalid credentials, try again !","good",3000);
+          this.notification.ShowMessage("Invalid credentials, try again !","bad",3000);
           // alert('Invalid credentials. Try again.');
         }
       );

@@ -32,7 +32,7 @@ export class CartComponent {
     });
 
     if (!this.authService.isAuthenticated()) {
-      this.notification.ShowMessage("You need to log in to view your cart!","good",3000);
+      this.notification.ShowMessage("You need to log in to view your cart!","bad",3000);
       // alert("You need to log in to view your cart!");
       this.router.navigate(['/login']);
       return;
@@ -55,7 +55,7 @@ export class CartComponent {
       }),
       catchError(error => {
         console.error("Cart API Error:", error);
-      this.notification.ShowMessage("Failed to fetch cart. Please try again.","good",3000);
+      this.notification.ShowMessage("Failed to fetch cart. Please try again.","bad",3000);
 
         // alert("Failed to fetch cart. Please try again.");
         return throwError(() => error);
@@ -103,7 +103,7 @@ export class CartComponent {
       },
       error: (error) => {
         console.error("API Error:", error);
-        this.notification.ShowMessage("Failed to update quantity.","good",3000);
+        this.notification.ShowMessage("Failed to update quantity.","bad",3000);
 
         // alert("Failed to update quantity.");
       }
@@ -120,7 +120,7 @@ export class CartComponent {
       error: (error) => {
         console.error("Failed to remove item:", error);
         // alert("Failed to remove item.");
-      this.notification.ShowMessage("Failed to remove item.","good",3000);
+      this.notification.ShowMessage("Failed to remove item.","bad",3000);
 
       }
     });
@@ -128,7 +128,7 @@ export class CartComponent {
 
   BuyNow() {
     if (this.selectedItems.size === 0) {
-      this.notification.ShowMessage("Please select at least one item.","good",3000);
+      this.notification.ShowMessage("Please select at least one item.","bad",3000);
 
       // alert("Please select at least one item.");
       return;

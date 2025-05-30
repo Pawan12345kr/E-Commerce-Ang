@@ -21,8 +21,10 @@ export class HomeComponent {
   private currentIndex = 0;
   
 
-  constructor(private notification : NotificationService, private productService: ProductService,
-                                     private authService: AuthService, private router: Router) {}
+  constructor(private notification : NotificationService,
+     private productService: ProductService,
+    private authService: AuthService, 
+    private router: Router) {}
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(status => {
@@ -48,9 +50,6 @@ export class HomeComponent {
   this.GetAllProducts();
   }
 
- 
-
-  // 
   startImageLoop() {
     setInterval(() => {
       this.updateImage();

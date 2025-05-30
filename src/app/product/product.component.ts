@@ -51,7 +51,7 @@ export class ProductComponent {
 
   addToCart(productId: number) {
     if (!this.authService.isAuthenticated()) {
-      this.notification.ShowMessage("You need to log in before adding items to the cart.","good",3000);
+      this.notification.ShowMessage("You need to log in before adding items to the cart.","bad",3000);
 
       // alert("You need to log in before adding items to the cart.");
       this.router.navigate(['/login']);

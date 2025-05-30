@@ -1,22 +1,40 @@
-<header class="header">
-    <div class="Logo" (click)="navigateToHome()">
-        <span class="LogoText" >Ubuy</span>
-        <h5 id="WeSell">WeSell</h5>
-    </div>
-    <nav class="navbar">
-        <div class="navContainer">
-            <span *ngIf="location" class="LocationElement">📌{{ location }}</span> 
-            <input type="text" class="SearchInputBox" placeholder="Search products..." />
-            <div class="ButtonContainer">
-                <!-- <button class="SimpleButton BtnColor1" (click)="navigateToCart()" >Cart</button> -->
-                <button *ngIf="!isLoggedIn" (click)="navigateToLogin()" class="SimpleButton BtnColor2">Login</button>
-                <button *ngIf="isLoggedIn" (click)="navigateToProfile()" class="SimpleButton BtnColor1">Profile</button>
-                <button *ngIf="isLoggedIn" (click)="logout()" class="SimpleButton BtnColor3">Logout</button>
-                <span class="cartimagecontainer" (click)="navigateToCart()">
-                    <img src="shopping-cart-svgrepo-com.svg" alt="">
-                </span>
-            </div>
-        </div> 
-    </nav>
-  </header>
-  
+<div class="HeaderContainerRoot">
+    <header class="header">
+        <div class="Logo" (click)="navigateToHome()">
+            <span class="LogoText" >Ubuy</span>
+            <h5 id="WeSell">WeSell</h5>
+        </div>
+        <nav class="navbar">
+            <div class="navContainer">
+                <span *ngIf="location" class="LocationElement">📌{{ location }}</span> 
+
+                <div class="searchContainer">
+                    <input type="text" class="SearchInputBox" placeholder="Search products..." (input)="OnSearchInput($event)" />
+                    <!-- search results -->
+                    <div *ngIf="searchResults.length > 0" class="searchResultsList">
+                        <span *ngFor="let product of searchResults" class="resultantproductspan" [routerLink]="'/product/' + product.id">
+                            {{ product.name}}
+                        </span>
+                    </div>
+                    <div *ngIf="NoProductsFound" class="NoProductsFound">
+                        No products found.
+                    </div>
+                </div>
+                
+
+
+
+                <div class="ButtonContainer">
+                    <!-- <button class="SimpleButton BtnColor1" (click)="navigateToCart()" >Cart</button> -->
+                    <button *ngIf="!isLoggedIn" (click)="navigateToLogin()" class="SimpleButton BtnColor1">Login</button>
+                    <button *ngIf="isLoggedIn" (click)="navigateToProfile()" class="SimpleButton BtnColor2">Profile</button>
+                    <span class="cartimagecontainer" (click)="navigateToCart()">
+                        <img src="shopping-cart-svgrepo-com.svg" alt="">
+                    </span>
+                    <button *ngIf="isLoggedIn" (click)="logout()" class="SimpleButton BtnColor3">Logout</button>
+                </div>
+            </div> 
+        </nav>
+      </header> 
+</div>
+

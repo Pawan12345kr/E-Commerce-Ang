@@ -53,6 +53,7 @@ export class ProductService {
       tap(data => console.log('Fetched All Products:', data)),
       catchError(error => {
         console.error('Error fetching all products:', error);
+        
         throw error;
       })
     );

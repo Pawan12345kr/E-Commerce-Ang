@@ -1,27 +1,41 @@
 <app-header></app-header>
 
-<div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card shadow-sm p-4 rounded" style="width: 38rem;">
-    <h2 class="text-center text-dark mb-3">Order Summary</h2>
-
-    
-    <div class="mb-3">
-      <label for="address" class="form-label fw-semibold">Delivery Address:</label>
-      <input id="address" type="text" [(ngModel)]="address" class="form-control border border-secondary" placeholder="Enter your address"/>
-      <small class="text-danger" *ngIf="errorMessages.address">{{ errorMessages.address }}</small>
+<div class="OrderPageContainer">
+  <div class="OrderPageSecondaryContainer">
+    <h2 class="OrderTitle">Order Summary</h2>
+    <hr>
+    <div class="AddressContainer">
+        <span class="AddressSpan">
+            <label for="address" class="LabelforAddress">Delivery Address :</label>
+            <input id="address" type="text" [(ngModel)]="address" class="InputDeliAddress" placeholder="Enter your address"/>
+            <small class="text-danger" *ngIf="errorMessages.address">{{ errorMessages.address }}</small>
+        </span>
+          
+        <span class="PincodeSpan">
+            <label for="pincode" class="LabelforPincode">Pincode :</label>
+            <input id="pincode" type="text" [(ngModel)]="pincode" class="InputPincode" placeholder="Enter pincode"/>
+            <small class="text-danger" *ngIf="errorMessages.pincode">{{ errorMessages.pincode }}</small>
+        </span>  
     </div>
+    <hr>
 
-    <div class="mb-3">
-      <label for="pincode" class="form-label fw-semibold">Pincode:</label>
-      <input id="pincode" type="text" [(ngModel)]="pincode" class="form-control border border-secondary" placeholder="Enter pincode"/>
-      <small class="text-danger" *ngIf="errorMessages.pincode">{{ errorMessages.pincode }}</small>
-    </div>
-
-    <hr class="my-3"/>
-
+    <h5 class="BillDetailsTitle">Bill Details</h5>
     
-    <h5 class="text-dark fw-semibold text-center">Items Ordered</h5>
-    <table class="table table-striped text-center">
+    <div class="ProductsFinalList">
+        <div class="HeadingsContainer">
+            <span id="ProductName" class="ElementBox">ProductName</span>
+            <span id="Quantity" class="ElementBox">Quantity</span>
+            <span id="Price" class="ElementBox">Price</span>
+        </div>
+        <div class="ContentContainer" *ngFor="let item of orderData.selectedItems">
+          <span id="names" class="ElementBox">{{ item.name }}</span>
+          <span id="quantities" class="ElementBox">{{ item.quantity }}</span>
+          <span id="prices" class="ElementBox">₹{{ item.price }}</span>
+        </div>
+        <div class="TotalPrice1">Total Amount: ₹{{ orderData.totalPrice }}</div>
+
+    </div>
+    <!-- <table class="table table-striped text-center">
       <thead class="table-secondary">
         <tr>
           <th>Product Name</th>
@@ -36,22 +50,26 @@
           <td>${{ item.price }}</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
-    <h5 class="text-danger fw-bold text-center mt-3">Total Amount: ${{ orderData.totalPrice }}</h5>
-
-    <hr class="my-3"/>
-
-    
-    <h5 class="text-dark fw-semibold">Select Payment Method:</h5>
-    <select [(ngModel)]="paymentMethod" class="form-select border border-secondary">
-      <option value="">-- Select Payment Method --</option>
-      <option value="Credit Card">Credit Card</option>
-      <option value="Debit Card">Debit Card</option>
-      <option value="Cash on Delivery">Cash on Delivery</option>
-    </select>
+    <div class="PaymentSelectContainer">
+        <h5 class="SelectLabel">Select Payment Method:</h5>
+        <select [(ngModel)]="paymentMethod" class="SelectPaymentSelect">
+            <option value="">-- Select Payment Method --</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+        </select>
+    </div>
     <small class="text-danger" *ngIf="errorMessages.paymentMethod">{{ errorMessages.paymentMethod }}</small>
 
-    <button class="btn btn-dark mt-4 w-100 fw-semibold py-2" (click)="placeOrder()">Confirm Order</button>
+
+    <div class="BottomConfirmContainer">
+        <span class="TotalAmountFooter">
+            <p class="TotalBill">Total Bill: ₹</p>
+            <p class="PriceTo">{{ orderData.totalPrice }}</p>
+        </span>
+        <button class="ConfirmButton" (click)="placeOrder()">Confirm Order</button>
+    </div>
   </div>
 </div>

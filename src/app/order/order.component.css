@@ -1,0 +1,236 @@
+.OrderPageContainer{
+    margin-top: 90px;
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background-color: rgb(255, 255, 255);
+}
+
+.OrderPageSecondaryContainer{
+ width: 90%;
+ height: 80%;
+ background-color: rgb(255, 255, 255);
+ border: 1px solid black;
+ border-radius: 20px;
+ padding: 20px 20px;
+}
+
+.OrderTitle{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.BillDetailsTitle{
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 25px;
+}
+
+.ProductsFinalList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/* Header container titles */
+.HeadingsContainer{
+    display: grid;
+    height: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: 10px;  */
+    width: 100%;
+    font-weight: 500;
+    font-size: 20px;
+    /* background-color: rgb(0, 160, 107); */
+}
+
+.HeadingsContainer .ElementBox{
+    background-color: rgb(0, 198, 152);
+    padding: 10px 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+
+.HeadingsContainer .ElementBox:nth-child(2)
+{
+    /* grid-column: span ; Item takes up 2 columns */
+    /* grid-row: 1; Places item in row 1 */
+}
+
+
+.ContentContainer{
+    width: 100%;
+    display: grid;
+    text-align: center;
+    height: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    
+
+    /* background-color: rgb(198, 198, 198);  */
+
+}
+.ContentContainer .ElementBox{
+    background-color: rgb(255, 255, 255);
+    padding: 10px 10px;
+    text-align: center;
+    border: 1px solid #dddddd;
+}
+
+.TotalPrice1{
+    width: 100%;
+    /* background-color: #dddddd; */
+    border: 1px solid #dddddd;
+    color: green;
+    height: 50px;
+    text-align:end;
+    padding: 10px 20px;
+    font-size:20px;
+    font-weight: 500;
+}
+
+/* input field */
+
+.AddressContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 25px;
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+.AddressSpan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 50%;
+    gap: 20px;
+}
+.AddressSpan input{
+    padding: 10px 20px;
+    border-radius: 15px;
+    outline: none;
+}
+
+.PincodeSpan{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    width: 50%;
+}
+.PincodeSpan input ,.AddressSpan input {
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    width: 50%;
+    font-size: larger;
+    border: 1px solid grey;
+    background-color: #fdfdfd;
+
+}
+
+.PincodeSpan input:focus,.AddressSpan input:focus {
+   
+    border: 1px solid rgb(37, 37, 37);
+    background-color: #ffffff;
+}
+
+
+.PincodeSpan label ,.AddressSpan label{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+/* payemnet slect */
+.PaymentSelectContainer{
+    margin-top: 50px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.SelectPaymentSelect {
+    background-color: #f8f9fa; /* Light gray background */
+    color: #333; /* Dark text color */
+    padding: 8px;
+    border: 2px solid #000000; /* Blue border */
+    border-radius: 5px;
+    font-size: 16px;
+    width: 50%;
+}
+
+.SelectPaymentSelect:focus {
+    border-color: #171717; /* Highlight border on focus */
+    outline: none;
+}
+
+
+
+
+/*  */
+.BottomConfirmContainer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 10px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(40, 40, 40);
+
+}
+
+.ConfirmButton{
+    border: none;
+    padding :10px 28px;
+    background-color: rgb(0, 201, 154);
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.TotalAmountFooter{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;    
+    /* background-color: rgb(18, 189, 205); */
+
+}
+
+.TotalAmountFooter .TotalBill{
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    margin-bottom: 0px;
+    height: 100%;
+    /* background-color: rgb(212, 49, 9); */
+}
+
+.TotalAmountFooter .PriceTo{
+    color: rgb(2, 186, 97);
+    /* background-color: rgb(198, 114, 12); */
+    font-size: 30px;
+    height: 100%;
+    font-weight: 700;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 3px;
+}

@@ -42,7 +42,7 @@ export class OrderComponent {
     });
 
     if (!this.authService.isAuthenticated()) {
-      this.notification.ShowMessage("You need to log in to place an order!","good",3000);
+      this.notification.ShowMessage("You need to log in to place an order!","bad",3000);
 
       // alert("You need to log in to place an order!");
       this.router.navigate(['/login']);
@@ -51,7 +51,7 @@ export class OrderComponent {
     this.orderData = history.state?.orderData ;
     console.log("Received Order Data:", this.orderData);
     if (!this.orderData) {
-      this.notification.ShowMessage("No items selected. Redirecting to cart.","good",3000);
+      this.notification.ShowMessage("No items selected. Redirecting to cart.","bad",3000);
 
       // alert("No items selected. Redirecting to cart.");
       this.router.navigate(['/cart']);
@@ -78,13 +78,13 @@ export class OrderComponent {
           this.pincode = response.pincode;
         } else {
           // alert("User address not found. Please update your profile.");
-        this.notification.ShowMessage("User address not found. Please update your profile.","good",3000);
+        this.notification.ShowMessage("User address not found. Please update your profile.","bad",3000);
 
         }
       },
       error: (error) => {
         console.error("Failed to load address:", error);
-        this.notification.ShowMessage("User address retrieval failed.","good",3000);
+        this.notification.ShowMessage("User address retrieval failed.","bad",3000);
 
         // alert("User address retrieval failed.");
       }
@@ -131,7 +131,7 @@ export class OrderComponent {
       },
       error: (error) => {
         console.error("Order placement failed:", error);
-        this.notification.ShowMessage(`Failed to place order: ${error.error?.message}`,"good",3000);
+        this.notification.ShowMessage(`Failed to place order: ${error.error?.message}`,"bad",3000);
         // alert(`Failed to place order: ${error.error?.message}`);
       }
     });
