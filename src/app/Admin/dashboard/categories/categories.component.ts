@@ -4,6 +4,7 @@ import { NotificationService } from '../../../services/notification.service';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-categories',
@@ -15,10 +16,11 @@ export class CategoriesComponent {
 
   AllCategories : any = [];
   confirmationstatus : boolean = false;
-  token = sessionStorage.getItem('token');
+  // token = sessionStorage.getItem('token');
 
 
   constructor( private adminservice : AdminService,
+    private authservice : AuthService,
     private notification : NotificationService,
     private http: HttpClient,
     private router : Router)
@@ -62,10 +64,11 @@ export class CategoriesComponent {
     confirmButton.onclick = () => {
         this.confirmationstatus = true;
         document.body.removeChild(PopupBox);
+        const token = this.authservice.getToken();
         // console.log("Confirmed:", this.confirmationstatus);
         // Only execute delete request after confirmation
         this.http.delete(`http://localhost:5156/api/Categories/${Categoryid}`,{
-          headers: this.token ? { Authorization: `Bearer ${this.token}` } : {},
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
           withCredentials: true
         }).subscribe(
             () => {

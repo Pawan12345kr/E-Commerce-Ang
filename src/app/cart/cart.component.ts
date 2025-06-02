@@ -100,15 +100,20 @@ export class CartComponent {
   }
 
   updateQuantity(cartItemId: number, newQuantity: number) {
+    const token = this.authService.getToken();
     const apiUrl = `http://localhost:5156/api/Cart/${cartItemId}/quantity?quantity=${newQuantity}`;
 
-    this.http.put(apiUrl, {}).subscribe({
+    this.http.put(apiUrl,{}, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {}, 
+      withCredentials: true
+    }).subscribe({
       next: () => {
         const item = this.cartItems.find(i => i.id === cartItemId);
         if (item) {
           item.quantity = newQuantity;
           item.total = item.quantity * item.price;
         }
+        // console.log("super da");
       },
       error: (error) => {
         console.error("API Error:", error);

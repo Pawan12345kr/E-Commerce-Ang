@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../services/notification.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-add-product',
@@ -16,7 +17,6 @@ export class AddProductComponent  implements OnInit{
 
   buttontitle = 'Add';
   AllCategories : any = [];
-  token = sessionStorage.getItem('token');
   NewProduct = {
       id: 0,
       name: '',
@@ -29,10 +29,11 @@ export class AddProductComponent  implements OnInit{
   };
 
   constructor(private adminservice : AdminService,
-    private http :HttpClient,
-    private notification: NotificationService,
-    private route : ActivatedRoute
-  ){}
+              private http :HttpClient,
+              private notification: NotificationService,
+              private authservice : AuthService,
+              private route : ActivatedRoute){};
+  
   ngOnInit(){
     this.adminservice.GetAllCategoriesforAdmin().subscribe(
       data => {
@@ -60,23 +61,11 @@ export class AddProductComponent  implements OnInit{
         }
       }
     )
-
-  // const product = history.state.product;
-  //   if (product) {
-  //       // Ensure values are set correctly
-  //       this.NewProduct.id = product.id ?? this.NewProduct.id;
-  //       this.NewProduct.name = product.name ?? this.NewProduct.name;
-  //       this.NewProduct.description = product.description ?? this.NewProduct.description;
-  //       this.NewProduct.price = product.price ?? this.NewProduct.price;
-  //       this.NewProduct.stock = product.stock ?? this.NewProduct.stock;
-  //       this.NewProduct.brand = product.brand ?? this.NewProduct.brand;
-  //       this.NewProduct.imageUrl = product.imageUrl ?? this.NewProduct.imageUrl;
-  //       this.NewProduct.categoryId = product.categoryId ?? this.NewProduct.categoryId;
-  //   }
   }
 
   AddNewProduct(){
     console.log(this.NewProduct);
+    const token = this.authservice.getToken();
 
     const formdata = new FormData();
     formdata.append('id',this.NewProduct.id.toString());
@@ -95,7 +84,7 @@ export class AddProductComponent  implements OnInit{
     if (this.NewProduct.id) {
       // Updating existing product
       this.http.put(`http://localhost:5156/api/Product/${this.NewProduct.id}`, formdata ,{
-        headers: this.token ? { Authorization: `Bearer ${this.token}` } : {},
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
         withCredentials: true}).subscribe(
           () => {
               // alert("✅ Product updated successfully!");
@@ -111,7 +100,9 @@ export class AddProductComponent  implements OnInit{
       );
   } else {
       // Adding new product
-      this.http.post('http://localhost:5156/api/Product', formdata).subscribe(
+      this.http.post('http://localhost:5156/api/Product', formdata,{
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      }).subscribe(
           () => {
               // alert("✅ Product added successfully!");
               this.notification.ShowMessage("Product added successfully ", "good",3000);
@@ -144,5 +135,18 @@ export class AddProductComponent  implements OnInit{
     console.log(file);
     this.NewProduct.imageUrl = file;
   }
-  
 }
+
+
+  // const product = history.state.product;
+  //   if (product) {
+  //       // Ensure values are set correctly
+  //       this.NewProduct.id = product.id ?? this.NewProduct.id;
+  //       this.NewProduct.name = product.name ?? this.NewProduct.name;
+  //       this.NewProduct.description = product.description ?? this.NewProduct.description;
+  //       this.NewProduct.price = product.price ?? this.NewProduct.price;
+  //       this.NewProduct.stock = product.stock ?? this.NewProduct.stock;
+  //       this.NewProduct.brand = product.brand ?? this.NewProduct.brand;
+  //       this.NewProduct.imageUrl = product.imageUrl ?? this.NewProduct.imageUrl;
+  //       this.NewProduct.categoryId = product.categoryId ?? this.NewProduct.categoryId;
+  //   }

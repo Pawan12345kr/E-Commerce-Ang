@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../services/notification.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -14,11 +15,11 @@ import { NotificationService } from '../../../services/notification.service';
 export class ProductsComponent {
   AllProducts : any = [];
   confirmationstatus : boolean = false;
-  token = sessionStorage.getItem('token');
 
 
   constructor( private adminservice : AdminService,
     private notification : NotificationService,
+    private authservice: AuthService,
     private http: HttpClient,
     private router : Router)
   {
@@ -61,10 +62,11 @@ export class ProductsComponent {
     confirmButton.onclick = () => {
         this.confirmationstatus = true;
         document.body.removeChild(PopupBox);
+        const token = this.authservice.getToken();
         // console.log("Confirmed:", this.confirmationstatus);
         // Only execute delete request after confirmation
         this.http.delete(`http://localhost:5156/api/Product/${productId}`,{
-          headers: this.token ? { Authorization: `Bearer ${this.token}` } : {},
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
           withCredentials: true
         }).subscribe(
             () => {

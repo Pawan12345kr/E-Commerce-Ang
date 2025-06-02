@@ -73,7 +73,6 @@ export const routes: Routes = [
             pathMatch:'full'
         }
     ]},
-
     // {path: 'product_detail',component:ProductdetailComponent},
     // { path: '**', redirectTo: '' } 
 ];

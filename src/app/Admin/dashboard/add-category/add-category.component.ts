@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../services/notification.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-add-category',
@@ -14,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 export class AddCategoryComponent {
   buttontitle = 'Add';
   AllCategories : any = [];
-  token = sessionStorage.getItem('token');
   NewCategory = {
       id: 0,
       name: '',
@@ -25,7 +25,8 @@ export class AddCategoryComponent {
   constructor(private adminservice : AdminService,
     private http :HttpClient,
     private notification: NotificationService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private authservice : AuthService
   ){}
   ngOnInit(){
     this.adminservice.GetAllCategoriesforAdmin().subscribe(
@@ -66,6 +67,7 @@ export class AddCategoryComponent {
   }
 
   AddNewCategory(){
+    const token = this.authservice.getToken();
     console.log(this.NewCategory);
 
     const formdata = new FormData();
@@ -81,23 +83,23 @@ export class AddCategoryComponent {
     if (this.NewCategory.id) {
       // Updating existing product
       this.http.put(`http://localhost:5156/api/categories/${this.NewCategory.id}`, formdata ,{
-        headers: this.token ? { Authorization: `Bearer ${this.token}` } : {},
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
         withCredentials: true}).subscribe(
           () => {
               // alert("✅ Product updated successfully!");
               this.notification.ShowMessage("Category updated successfully!", "good",3000);
-
           },
           (error) => {
               console.error("Error updating product:", error);
               // alert("❌ Failed to update product.");
               this.notification.ShowMessage("Failed to update Category.", "warn",3000);
-
           }
       );
   } else {
       // Adding new product
-      this.http.post('http://localhost:5156/api/Categories', formdata).subscribe(
+      this.http.post('http://localhost:5156/api/Categories', formdata,{
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      }).subscribe(
           () => {
               // alert("✅ Product added successfully!");
               this.notification.ShowMessage("Category added successfully ", "good",3000);

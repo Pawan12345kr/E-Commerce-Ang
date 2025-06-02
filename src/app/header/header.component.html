@@ -1,3 +1,5 @@
+
+
 <div class="HeaderContainerRoot">
     <header class="header">
         <div class="Logo" (click)="navigateToHome()">
@@ -25,7 +27,6 @@
                 </div>
 
                 <div class="ButtonContainer">
-                    <!-- <button class="SimpleButton BtnColor1" (click)="navigateToCart()" >Cart</button> -->
                     <button *ngIf="!isLoggedIn" (click)="navigateToLogin()" class="SimpleButton BtnColor1" title="login"> <img src="login1.svg" height="30px" width="35px" style="padding-right: 5px;" alt="">Login / Register</button>
                     <button *ngIf="isLoggedIn" (click)="navigateToProfile()" class="SimpleButton BtnColor2" title="Profile"><img src="profileicon.svg" height="30px" width="35px" style="padding-right: 10px;" alt="">Profile</button>
                     <button class="SimpleButton BtnColor5" (click)="navigateToCart()" title="Cart">
