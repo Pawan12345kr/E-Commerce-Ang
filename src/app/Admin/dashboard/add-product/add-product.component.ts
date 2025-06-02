@@ -4,7 +4,7 @@ import { AdminService } from '../../admin.service';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../services/notification.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -30,6 +30,7 @@ export class AddProductComponent  implements OnInit{
 
   constructor(private adminservice : AdminService,
               private http :HttpClient,
+              private router : Router,
               private notification: NotificationService,
               private authservice : AuthService,
               private route : ActivatedRoute){};
@@ -78,7 +79,7 @@ export class AddProductComponent  implements OnInit{
 
     if(this.NewProduct.imageUrl){
       formdata.append('ImageFile',this.NewProduct.imageUrl)
-      console.log("Final newproduct data :",this.NewProduct);
+      // console.log("Final newproduct data :",this.NewProduct);
     }
 
     if (this.NewProduct.id) {
@@ -87,15 +88,13 @@ export class AddProductComponent  implements OnInit{
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         withCredentials: true}).subscribe(
           () => {
-              // alert("✅ Product updated successfully!");
               this.notification.ShowMessage("Product updated successfully!", "good",3000);
+              this.router.navigateByUrl('/admin/Products');
 
           },
           (error) => {
               console.error("Error updating product:", error);
-              // alert("❌ Failed to update product.");
               this.notification.ShowMessage("Failed to update product.", "warn",3000);
-
           }
       );
   } else {
@@ -104,12 +103,11 @@ export class AddProductComponent  implements OnInit{
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       }).subscribe(
           () => {
-              // alert("✅ Product added successfully!");
               this.notification.ShowMessage("Product added successfully ", "good",3000);
+              this.router.navigateByUrl('/admin/Products');
           },
           (error) => {
               console.error("Error adding product:", error);
-              // alert("❌ Failed to add product.");
               this.notification.ShowMessage("Failed to add product.", "warn",3000);
           }
       );

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../services/notification.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 
@@ -24,6 +24,7 @@ export class AddCategoryComponent {
 
   constructor(private adminservice : AdminService,
     private http :HttpClient,
+    private router : Router,
     private notification: NotificationService,
     private route : ActivatedRoute,
     private authservice : AuthService
@@ -86,12 +87,11 @@ export class AddCategoryComponent {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         withCredentials: true}).subscribe(
           () => {
-              // alert("✅ Product updated successfully!");
               this.notification.ShowMessage("Category updated successfully!", "good",3000);
+              this.router.navigateByUrl('/admin/Categories');
           },
           (error) => {
               console.error("Error updating product:", error);
-              // alert("❌ Failed to update product.");
               this.notification.ShowMessage("Failed to update Category.", "warn",3000);
           }
       );
@@ -101,12 +101,11 @@ export class AddCategoryComponent {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       }).subscribe(
           () => {
-              // alert("✅ Product added successfully!");
               this.notification.ShowMessage("Category added successfully ", "good",3000);
+              this.router.navigateByUrl('/admin/Categories');
           },
           (error) => {
               console.error("Error adding product:", error);
-              // alert("❌ Failed to add product.");
               this.notification.ShowMessage("Failed to add Category.", "warn",3000);
           }
       );

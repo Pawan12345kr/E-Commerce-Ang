@@ -106,7 +106,7 @@ export class HeaderComponent implements OnInit {
   getAddressFromCoordinates(lat: number, lng: number) {
     const apiKey = '2723b29fa2bf4484bc912ae96f849fca'; 
     const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=${apiKey}`;
-  
+    
     fetch(url)
       .then(response => response.json())
       .then(data => {

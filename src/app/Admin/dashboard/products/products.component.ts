@@ -70,7 +70,7 @@ export class ProductsComponent {
           withCredentials: true
         }).subscribe(
             () => {
-                this.notification.ShowMessage("Product deleted successfully!", "notify", 3000);
+                this.notification.ShowMessage("Product deleted successfully!", "delete", 3000);
                 this.GetAllProducts(); // Refresh product list
             },
             (error) => {

@@ -43,6 +43,9 @@ export class NotificationService {
     {
       this.imageSrc = "redbell.svg";
     }
+    else if(status == "delete"){
+      this.imageSrc = "deletebin.svg";
+    }
     else if(status == "warn")
       {
         this.imageSrc = "warn.svg";
