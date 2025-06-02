@@ -4,110 +4,113 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { HeaderComponent } from '../header/header.component';
 import { NotificationService } from '../services/notification.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
-interface OrderItem {
-  productName: string;
-  quantity: number;
-  price: number;
-}
+// interface OrderItem {
+//   productName: string;
+//   quantity: number;
+//   price: number;
+// }
 
-interface Order {
-  orderDate: string;
-  paymentMethod: string;
-  status: string;
-  address: string;
-  orderItems: OrderItem[];
-}
+// interface Order {
+//   orderDate: string;
+//   paymentMethod: string;
+//   status: string;
+//   address: string;
+//   orderItems: OrderItem[];
+// }
 
-interface UserInfo {
-  success: boolean;
-  name: string;
-  email: string;
-  address: string;
-  pincode: string;
-  mobile: string;
-}
+// interface UserInfo {
+//   success: boolean;
+//   name: string;
+//   email: string;
+//   address: string;
+//   pincode: string;
+//   mobile: string;
+// }
 
 @Component({
   standalone: true,
   selector: 'app-profile',
-  imports: [HeaderComponent, CommonModule],
+  imports: [HeaderComponent, CommonModule,RouterOutlet,RouterLink],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
   isLoggedIn = false;
-  userInfo: UserInfo | null = null;
-  orders: Order[] = [];
+  userInfo :any = [];
+  orders :any = [];
 
   constructor(private authService: AuthService,
     private notification : NotificationService, private http: HttpClient) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
+    // this.authService.isLoggedIn$.subscribe(status => {
+    //   this.isLoggedIn = status;
+    // });
 
-    if (!this.authService.isAuthenticated()) {      
-      this.notification.ShowMessage("You need to log in to view your profile!","bad",3000);
+    if (this.authService.isAuthenticated()) {      
+      this.isLoggedIn = true;
       // alert("You need to log in to view your profile!");
+    }
+    else{
+      this.notification.ShowMessage("You need to log in to view your profile!","notify",3000);
       return;
     }
 
     this.fetchUserInfo();
-    this.fetchUserOrders();
+    // this.fetchUserOrders();
   }
 
   private fetchUserInfo() {
     const apiUrl = `http://localhost:5156/api/Account/address`;
-    const token = this.authService.getToken(); // ✅ Retrieve JWT token
-
-    this.http.get<UserInfo>(apiUrl, {
-      headers: token ? { Authorization: `Bearer ${token}` } : {}, // ✅ Attach token
+    const token = this.authService.getToken(); 
+ 
+    this.http.get(apiUrl, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
       withCredentials: true
     }).subscribe({
-      next: (response) => {
+      next: (response :any) => {
         if (response.success) {
           this.userInfo = response;
-        } else {
-      this.notification.ShowMessage("User details not found.","bad",3000);
-
+        } 
+        else {
+          this.notification.ShowMessage("User details not found.","notify",3000);
           // alert("User details not found.");
         }
       },
       error: (error) => {
         console.error("Error fetching user info:", error);
-      this.notification.ShowMessage("Failed to load user details.","bad",3000);
-
+        this.notification.ShowMessage("Failed to load user details.","warn",3000);
         // alert("Failed to load user details.");
       }
     });
   }
 
-  private fetchUserOrders() {
-    const apiUrl = `http://localhost:5156/api/Order/userorders`;
-    const token = this.authService.getToken(); // ✅ Retrieve JWT token
+  // private fetchUserOrders() {
+  //   const apiUrl = `http://localhost:5156/api/Order/userorders`;
+  //   const token = this.authService.getToken();
 
-    this.http.get<{ success: boolean; orders: any }>(apiUrl, {
-      headers: token ? { Authorization: `Bearer ${token}` } : {}, // ✅ Attach token
-      withCredentials: true
-    }).subscribe({
-      next: (response) => {
-        console.log("Order response:", response);
+  //   this.http.get<{ success: boolean; orders: any }>(apiUrl, {
+  //     headers: token ? { Authorization: `Bearer ${token}` } : {}, 
+  //     withCredentials: true
+  //   }).subscribe({
+  //     next: (response) => {
+  //       console.log("Order response:", response);
 
-        if (response.success && response.orders && Array.isArray(response.orders)) { 
-          this.orders = response.orders; 
-          console.log("Orders successfully assigned:", this.orders);
-        } else {
-          console.error("No orders found.");
-        }
-      },
-      error: (error) => {
-        console.error("Error fetching user orders:", error);
-        this.notification.ShowMessage("Failed to retrieve order history.","bad",3000);
+  //       if (response.success && response.orders && Array.isArray(response.orders)) { 
+  //         this.orders = response.orders; 
+  //         console.log("Orders successfully assigned:", this.orders);
+  //       } else {
+  //         console.error("No orders found.");
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error("Error fetching user orders:", error);
+  //       this.notification.ShowMessage("Failed to retrieve order history.","warn",3000);
 
-        // alert("Failed to retrieve order history.");
-      }
-    });
-  }
+  //       // alert("Failed to retrieve order history.");
+  //     }
+  //   });
+  // }
 }

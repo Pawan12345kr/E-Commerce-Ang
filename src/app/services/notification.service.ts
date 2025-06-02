@@ -27,36 +27,51 @@ export class NotificationService {
   //   }, duration);
   // }
 
-
+  imageSrc : string = '' ;
   ShowMessage(message : string ,status : string, duration : number){
     const notificationDiv = document.createElement('div');
-    let imageSrc = status == "good" ? "tick.svg" : "warning.svg";
-    notificationDiv.innerHTML = `
-    <div class="headerfornotification">
-      <span class="Title">
-          Ubuy-WeSell
-      </span>
-      <span class="CloseContainer">
-        <img src="close.png" alt="" onclick="this.parentElement.parentElement.parentElement.remove()">
-      </span>
-    </div>
-    <div class="ContentContainer">
-        <div class="statusimage">
-            <img src="${imageSrc}" alt="">
-        </div>
-        <div class="MessageContainer">
-            <p class="Messages">${message}</p>
-        </div>
-    </div>`;
-    notificationDiv.className = 'NotificationContainer';
+    
     if(status == "good")
     {
-      notificationDiv.style.color= "white";
+      this.imageSrc = "tick.svg";
     }
-    else if(status == "bad")
+    else if(status == "info")
     {
-      notificationDiv.style.color= "red";
+      this.imageSrc = "filen.svg";
     }
+    else if(status == "notify")
+    {
+      this.imageSrc = "redbell.svg";
+    }
+    else if(status == "warn")
+      {
+        this.imageSrc = "warn.svg";
+      }
+
+    
+    // let imageSrc = status == "good" ? "tick.svg" : "warning.svg";
+    notificationDiv.innerHTML = `
+          <div class="ContentContainer">
+                <span class="statusimage">
+                    <img src=${this.imageSrc} alt="">
+                </span>
+                <span class="MessageContainer">
+                    <p class="Messages">${message}</p>
+                </span>
+                <span class="CloseContainer">
+                  <img src="closewhite.png" alt="" onclick="this.parentElement.parentElement.parentElement.remove()">
+                </span>
+          </div>
+    `;
+    notificationDiv.className = 'NotificationContainer';
+    // if(status == "good")
+    // {
+    //   notificationDiv.style.color= "white";
+    // }
+    // else if(status == "bad")
+    // {
+    //   notificationDiv.style.color= "red";
+    // }
 
     document.body.appendChild(notificationDiv);
 

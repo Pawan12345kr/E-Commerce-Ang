@@ -8,7 +8,7 @@ import { NotificationService } from '../services/notification.service';
 @Component({
   standalone: true,
   selector: 'app-register',
-  imports: [CommonModule, FormsModule, HeaderComponent,RouterLink],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -36,7 +36,7 @@ export class RegisterComponent {
           },
           error =>{
             console.error('Registration failed', error);
-            this.notification.ShowMessage(`Registration failed ${error.message}`,"bad",3000);
+            this.notification.ShowMessage(`Registration failed ${error.message}`,"notify",3000);
 
             // alert('Registration failed');
           }

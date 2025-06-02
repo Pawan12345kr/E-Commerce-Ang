@@ -82,7 +82,7 @@
     max-width: 150px; /* Set a reasonable limit */
     overflow: hidden;
     white-space: nowrap;     /*Prevents text from wrapping */
-    text-overflow: ellipsis; /
+    text-overflow: ellipsis; 
   }
 
 .AdContainer{

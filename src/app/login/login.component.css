@@ -9,9 +9,10 @@
 .LoginBox {
     width: 100%;
     max-width: 400px;
+    height: 330px;
     margin: 50px auto;
     padding: 20px 10px;
-    background: rgb(0, 0, 0);
+    background: rgb(42, 42, 42);
     border-radius: 25px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -43,9 +44,10 @@
     width: 80%;
     margin: 5px 0;
     margin-bottom: 30px;
-    padding: 0px 10px;
+    padding: 0px 20px;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 20px;
+    height: 50px;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -53,15 +55,17 @@
 }
 
 .LoginBox .EmailInput:focus{
-  outline: rgb(224, 11, 11);
-  background-color: aquamarine;
-  font-size: 20.5px;
+  /* outline: rgb(224, 11, 11); */
+  /* background-color: aquamarine; */
+  border: 2px solid rgb(8, 163, 101);
+  font-size: 20.1px;
 }
 
 .LoginBox .PasswordInput:focus{
-  outline: rgb(224, 11, 11);
-  background-color: aquamarine;
-  font-size: 31px;
+  /* outline: rgb(224, 11, 11); */
+  /* background-color: aquamarine; */
+  border: 2px solid rgb(8, 163, 101);
+  font-size: 21px;
 }
 button {
     background: #09a674;

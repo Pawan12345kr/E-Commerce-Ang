@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ProductService, Category } from '../services/product.service';
 import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';
 @Component({
@@ -27,10 +27,16 @@ export class HomeComponent {
     private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.isLoggedIn$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
+    // this.authService.isLoggedIn$.subscribe(status => {
+    //   this.isLoggedIn = status;
+    // });
 
+    if(this.authService.isAuthenticated())
+    {
+        this.isLoggedIn = true;
+    }
+
+    
     this.productService.getCategory().subscribe({
       next: (data) => {
         console.log('Received Category Data:', data);
@@ -96,9 +102,12 @@ export class HomeComponent {
     this.authService.addToCart(cartItem).subscribe({
       next: (response) => {
         console.log("Product added successfully!", response)
-        this.notification.ShowMessage("Item Added to cart","good",3000)
+        this.notification.ShowMessage("Item Added to cart","good",3000);
       },
-      error: (error) => console.error("Error adding product to cart:", error)
+      error: (error) => {
+        console.error("Error adding product to cart:", error);
+        // this.notification.ShowMessage("Error adding product to cart","warn",3000);
+      }
     });
   }
 

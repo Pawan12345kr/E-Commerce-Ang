@@ -27,15 +27,24 @@ export class CartComponent {
     private notification : NotificationService) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
+    // this.isLoggedIn = this.authService.isAuthenticated(); 
+    // if (!this.isLoggedIn) {
+    //   this.notification.ShowMessage("You need to log in to view your cart!", "bad", 3000);
+    //   this.router.navigate(['/login']);
+    //   return;
+    // }
+
+    // this.loadCart();
+    /////////
 
     if (!this.authService.isAuthenticated()) {
-      this.notification.ShowMessage("You need to log in to view your cart!","bad",3000);
+      this.notification.ShowMessage("You need to log in to view your cart!","notify",3000);
       // alert("You need to log in to view your cart!");
       this.router.navigate(['/login']);
       return;
+    }
+    else{
+      this.isLoggedIn = true;
     }
 
     this.loadCart();
@@ -55,7 +64,7 @@ export class CartComponent {
       }),
       catchError(error => {
         console.error("Cart API Error:", error);
-      this.notification.ShowMessage("Failed to fetch cart. Please try again.","bad",3000);
+        this.notification.ShowMessage("Failed to fetch cart. Please try again.","warn",3000);
 
         // alert("Failed to fetch cart. Please try again.");
         return throwError(() => error);
@@ -103,7 +112,7 @@ export class CartComponent {
       },
       error: (error) => {
         console.error("API Error:", error);
-        this.notification.ShowMessage("Failed to update quantity.","bad",3000);
+        this.notification.ShowMessage("Failed to update quantity.","warn",3000);
 
         // alert("Failed to update quantity.");
       }
@@ -120,7 +129,7 @@ export class CartComponent {
       error: (error) => {
         console.error("Failed to remove item:", error);
         // alert("Failed to remove item.");
-      this.notification.ShowMessage("Failed to remove item.","bad",3000);
+      this.notification.ShowMessage("Failed to remove item.","warn",3000);
 
       }
     });
@@ -128,8 +137,7 @@ export class CartComponent {
 
   BuyNow() {
     if (this.selectedItems.size === 0) {
-      this.notification.ShowMessage("Please select at least one item.","bad",3000);
-
+      this.notification.ShowMessage("Please select at least one item.","notify",3000);
       // alert("Please select at least one item.");
       return;
     }

@@ -16,7 +16,7 @@ header {
 }
 .navbar{
     position: absolute;
-    right:50px;
+    right:5px;
     top: -3px;
     bottom: 3px;
     display:flex;
@@ -44,7 +44,7 @@ header {
 .LocationElement{
   font-size: 18px;
   font-weight: 500;
-  width:300px;
+  width:250px;
   /* background-color: blueviolet; */
   overflow: hidden;
   white-space: nowrap;
@@ -53,6 +53,23 @@ header {
   
   /* background-color: rgb(31, 225, 102); */
 }
+
+.refreshButton{
+  border: none;
+  background-color: transparent;
+  padding: 3px 3px;
+  transition: all 0.2s ease-in-out;
+  border-radius:20px;
+}
+
+.refreshButton:hover{
+  transform: scale(0.95);
+}
+
+.refreshButton:active{
+  transform: scale(0.95);
+}
+
 .Logo{
   cursor: pointer;
 }
@@ -72,7 +89,7 @@ header {
   top: 52px;
   left: 50px;
   font-weight: 800;
-  color:aqua;
+  color:rgb(15, 203, 255);
   font-size: 16px;
 
 
@@ -81,11 +98,18 @@ header {
 
 .SimpleButton{
   border: none;
-  padding: 7px 30px;
+  padding: 7px 15px;
   border-radius: 8px;
   font-size: 18px;
   font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
+
+.SimpleButton:hover{
+  transform: scale(0.97);
+  text-decoration:underline;
+}
+
 
 .ButtonContainer{
   display: flex;
@@ -95,15 +119,27 @@ header {
 }
 
 .BtnColor1{
-  background-color: rgb(68, 181, 96);
+  background-color: rgb(41, 41, 41);
+  color: white;
 }
 
 .BtnColor2{
-  background-color: rgb(255, 172, 47);
+  /* background-color: rgb(36, 36, 36); */
+  background-color: transparent;
+  color: rgb(255, 255, 255);
 }
 .BtnColor3{
-  background-color: rgb(255, 16, 16);
+  /* background-color: rgb(50, 50, 50); */
+  background-color: transparent;
+  color: white;
+  /* border: 1px solid grey; */
 }
+.BtnColor5{
+  background-color: transparent;
+  color: white;
+}
+
+
 
 .cartimagecontainer{
   padding: 2px 2px;
@@ -111,7 +147,12 @@ header {
   font-size: 18px;
   width:70px;
   height: 40px;
-  background-color: rgb(226, 223, 43);
+  /* background-color: rgb(253, 253, 253); */
+  transition: all 0.2s ease-in-out;
+}
+
+.cartimagecontainer:hover{
+  transform: scale(0.97);
 }
 
 .cartimagecontainer img{

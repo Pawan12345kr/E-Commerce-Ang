@@ -1,0 +1,15 @@
+<app-header></app-header>
+<div id="DashBoardContainer">
+    <div id="DashBoardInnerContainer">
+        <div id="sidebarContainer">
+            <a [routerLink]="['/admin/home']" id="Home">Home</a>
+            <a [routerLink]="['/admin/Products/']" id="Products">Products</a>
+            <a [routerLink]="['/admin/Categories']" id="Analytics">Categories</a>
+            <a [routerLink]="['/admin/Orders']" id="Categories">Orders</a>
+            <a [routerLink]="['/admin/Users']" id="Analytics">Customers</a>
+        </div>
+        <div id="MainPageContainer">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

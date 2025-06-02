@@ -69,7 +69,7 @@ export class ProductdetailComponent implements OnInit {
       console.log("recommended products ", productofthatcategory);
     }catch(error){
       console.error("Error fetching recommended products:", error);   
-      this.notification.ShowMessage(`Error fetching recommended products: ${error}`,"bad",3000);
+      this.notification.ShowMessage(`Error fetching recommended products: ${error}`,"notify",3000);
 
     }
   }

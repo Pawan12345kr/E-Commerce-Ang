@@ -15,6 +15,7 @@ import { NotificationService } from '../services/notification.service';
 export class LoginComponent {
     email = '';
     password = '';
+    // IsAdmin = false;
     constructor(private authService: AuthService, 
       private router: Router,
       private notification : NotificationService)
@@ -25,11 +26,17 @@ export class LoginComponent {
           console.log('Login successful:', response);
           this.notification.ShowMessage("Login Successful !","good",3000);
           // alert('Login Successful! Redirecting...');
+          console.log("role of user : " , response.role);
+          if(response.role == "Admin")
+          {
+              // this.IsAdmin = true;
+              sessionStorage.setItem("Role",response.role);
+          };
           this.router.navigate(['']);
         },
         error => {
           console.error('Login failed:', error);
-          this.notification.ShowMessage("Invalid credentials, try again !","bad",3000);
+          this.notification.ShowMessage("Invalid credentials, try again !","notify",3000);
           // alert('Invalid credentials. Try again.');
         }
       );

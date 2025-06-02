@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="RootProfileContainer">
+    <div class="SecondProfileContainer">
+      <div class="TopSidebarContainerForProfile">
+        <a [routerLink]="['/profile']" id="Profiledetails">Profile</a>
+        <a [routerLink]="['/orderhistory']" id="Profiledetails">Orders</a>
+      </div>
+
+      <div class="ContentSideContentContainer">
+            <h4 class="HeadingProfile"> Order History</h4>
+            <div class="HeadCont">
+                <span class="HeadingsOrders">
+                    <p class="Orderdate">Order Date</p>
+                    <p class="Orderdate">Delivery Address</p>
+                    <p class="Orderdate">Payment Method</p>
+                    <p class="Orderdate">Status</p>
+                    <p class="Orderdate">Order Items</p>
+                </span>
+            </div>
+            <div class="InsideContainer" *ngIf="orders.length > 0; else noOrders">
+                <div *ngFor="let order of orders" class="OrderDetailsContainer">
+                    <span class="DataForOrderDetails">
+                        <p>{{ order.orderDate | date:'medium' }}</p>
+                        <p>{{ order.address }}</p>
+                        <p>{{ order.paymentMethod }}</p>
+                        <p>{{ order.status }}</p>
+                        <ul>
+                            <li *ngFor="let item of order.orderItems">
+                                {{item.productName}} {{ item.quantity }}  {{ item.price }}
+                            </li>
+                        </ul>
+                    </span>
+                    <!-- <p><strong>Order Date:</strong> {{ order.orderDate | date:'medium' }}</p>
+                    <p><strong>Payment Method:</strong> {{ order.paymentMethod }}</p>
+                    <p><strong>Status:</strong> {{ order.status }}</p>
+                    <p><strong>Delivery Address:</strong> {{ order.address }}</p>
+                    <h6> Order Items:</h6>
+                    <ul>
+                    <li *ngFor="let item of order.orderItems">
+                        {{item.productName}} {{ item.quantity }}  {{ item.price }}
+                    </li>
+                    </ul> -->
+                </div>
+            </div>
+            <ng-template #noOrders>
+                <p class="text-danger">No orders found.</p>
+            </ng-template>
+        </div>

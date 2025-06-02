@@ -10,7 +10,7 @@ import { NotificationService } from '../services/notification.service';
   selector: 'app-header',
   imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   searchResults : any[] = [];
   searchTerm = '';
   NoProductsFound = false;
-
+  IsAdmin = false;
 
   constructor(private authService: AuthService, 
     private router: Router,
@@ -28,15 +28,31 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
       this.isLoggedIn = true;
+    };
+
+    var Role = sessionStorage.getItem("Role");
+    if(Role == "Admin")
+    {
+        this.IsAdmin = true;
     }
-    this.updateLocation();
+
+    // stopped the continuous updationof location
+    const storedLocation = sessionStorage.getItem('Currentlocation');
+    if (storedLocation) {
+      this.location = storedLocation;
+    } else {
+      this.updateLocation(); 
+    }
   }
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+    this.location = '';
+    sessionStorage.removeItem("Currentlocation");
+    sessionStorage.removeItem("Role");
   }
   navigateToHome(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['']);
   }
   navigateToLogin()
   {
@@ -46,7 +62,7 @@ export class HeaderComponent implements OnInit {
   {
     if (!this.authService.isAuthenticated()) {
       // alert("You need to log in before accessing the cart.");
-      this.notification.ShowMessage("Log in to access the cart","bad",3000)
+      this.notification.ShowMessage("Log in to access the cart","notify",3000);
 
       return;
     }
@@ -57,7 +73,7 @@ export class HeaderComponent implements OnInit {
   navigateToProfile()
   {
     if (!this.authService.isAuthenticated()) {
-      this.notification.ShowMessage("Please Log In to Access","bad",3000);
+      this.notification.ShowMessage("Please Log In to Access","notify",3000);
       // alert("Please log in to access your profile.");
       return;
     }
@@ -65,6 +81,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
   updateLocation() {
+    this.location = '';
+    sessionStorage.removeItem("Currentlocation");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -75,15 +93,14 @@ export class HeaderComponent implements OnInit {
         },
         (error) => {
           console.error('Error getting location:', error);
-          this.notification.ShowMessage("Unable to fetch location. Please enable GPS.","bad",3000);
+          this.notification.ShowMessage("Unable to fetch location. Please enable GPS.","notify",3000);
 
           // alert('Unable to fetch location. Please enable GPS.');
         }
       );
     } else {
       // alert('Geolocation is not supported by your browser.');      
-      this.notification.ShowMessage("Geolocation is not supported by your browser.","bad",3000);
-
+      this.notification.ShowMessage("Geolocation is not supported by your browser.","info",3000);
     }
   }
   getAddressFromCoordinates(lat: number, lng: number) {
@@ -95,18 +112,20 @@ export class HeaderComponent implements OnInit {
       .then(data => {
         console.log("response data",data);
         if (data.features.length > 0) {
-          this.location = data.features[0].properties.formatted; 
+          console.log("fetched loaction from api : ", data);
+          this.location = data.features[0].properties.formatted;
+          sessionStorage.setItem('Currentlocation',this.location);
         } else {
           //console.error('No address found');
           // alert('Unable to fetch address.');      
-          this.notification.ShowMessage("Unable to fetch address.","bad",3000);
+          this.notification.ShowMessage("Unable to fetch address.","notify",3000);
 
         }
       })
       .catch(error => {
         //console.error('Error fetching address:', error);
         // alert('Error fetching address.');
-        this.notification.ShowMessage("Error fetching address.","bad",3000);
+        this.notification.ShowMessage("Error fetching address.","warn",3000);
 
       });
   }

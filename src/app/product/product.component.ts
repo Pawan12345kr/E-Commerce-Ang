@@ -32,9 +32,14 @@ export class ProductComponent {
   ) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
+    // this.authService.isLoggedIn$.subscribe(status => {
+    //   this.isLoggedIn = status;
+    // });
+
+    if (this.authService.isAuthenticated()) {
+      this.isLoggedIn = true;
+    }
+    
     const productId = Number(this.route.snapshot.params['id']);
     this.productService.getProductById(productId).subscribe({
       next: (data) => {
@@ -51,7 +56,7 @@ export class ProductComponent {
 
   addToCart(productId: number) {
     if (!this.authService.isAuthenticated()) {
-      this.notification.ShowMessage("You need to log in before adding items to the cart.","bad",3000);
+      this.notification.ShowMessage("You need to log in before adding items to the cart.","notify",3000);
 
       // alert("You need to log in before adding items to the cart.");
       this.router.navigate(['/login']);
@@ -68,7 +73,7 @@ export class ProductComponent {
       },
       error: (error) => {
         console.error('Failed to add to cart:', error);
-        this.notification.ShowMessage("failed to add product","bad",3000)
+        this.notification.ShowMessage("failed to add product","warn",3000)
       }
     });
   }
