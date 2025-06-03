@@ -54,6 +54,10 @@
     /* border: 1px solid rgb(255, 255, 255); */
 }
 
+#sidebarContainer a:nth-child(1){
+    background-color: rgb(2, 234, 130);
+}
+
 #sidebarContainer a:active{
     background-color: rgb(26, 227, 177);
     color: black;

@@ -9,8 +9,9 @@
         <div class="image_container" [routerLink]="'/product/' + product.id">
             <!-- <img src="{{product.imageUrl}}" alt="{{product.name}}"> -->
             <!-- <img src="productimage(headphone).png" alt="{{product.name}}"> -->
-            <img [src]="'http://localhost:5156' + product.imageUrl" alt="Product Image">
 
+            <!-- <img [src]="'http://localhost:5156' + product.imageUrl" alt="Product Image"> -->
+            <img [src]="product.imageUrl == 'https://example.com/example.jpg' ?  'apple.svg' : 'http://localhost:5156' + product.imageUrl" alt="categ.name">
 
             <!-- <img [src]="'/images/' + product.imageurl.replace('/images', '')" [alt]="product.name"> -->
             <!-- <img [src]="getImageUrl(product)" [alt]="product.name"> -->

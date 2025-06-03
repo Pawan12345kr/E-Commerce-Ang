@@ -12,7 +12,10 @@
         <div class="AllproductsSubContainer" *ngIf="AllCategories.length > 0; else noCategories">
         <ul>
         <li *ngFor="let cate of AllCategories" class="productitemlist">
-            <img [src]="'http://localhost:5156' + cate.imageUrl" alt="{{ cate.name }}">
+
+            <!-- <img [src]="'http://localhost:5156' + cate.imageUrl" alt="{{ cate.name }}"> -->
+            <img [src]="cate.imageUrl == 'https://example.com/example.jpg' ?  'category.svg' : 'http://localhost:5156' + cate.imageUrl" alt="categ.name">
+
             <div class="productDetailsDiv">
                 <h3 title="{{cate.description}}">{{ cate.name }}</h3>
                 <p>{{ cate.description }}</p>

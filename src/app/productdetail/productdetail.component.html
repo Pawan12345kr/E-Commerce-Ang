@@ -6,7 +6,10 @@
     <div class="product_details_container">
         <div id="image_container">
             <!-- <img src="productimage(headphone).png" alt="product image"> -->
-            <img [src]="'http://localhost:5156' + product.imageUrl" alt="Product Image" width="100">
+             
+            <!-- <img [src]="'http://localhost:5156' + product.imageUrl" alt="Product Image" width="100"> -->
+            <img [src]="product.imageUrl == 'https://example.com/example.jpg' ?  'apple.svg' : 'http://localhost:5156' + product.imageUrl" alt="categ.name">
+
 
         </div>
         <div class="product_detail_sec_container">
@@ -33,7 +36,11 @@
               <div class="image_container" (click)="goToProduct(rec_product.id)">
                   <!-- <img src="{{product.imageUrl}}" alt="{{product.name}}"> -->
                   <!-- <img src="productimage(headphone).png" alt="{{product.name}}"> -->
-                  <img [src]="'http://localhost:5156' + rec_product.imageUrl" alt="Product Image">
+
+
+                  <!-- <img [src]="'http://localhost:5156' + rec_product.imageUrl" alt="Product Image"> -->
+                  <img [src]="rec_product.imageUrl == 'https://example.com/example.jpg' ?  'apple.svg' : 'http://localhost:5156' + rec_product.imageUrl" alt="categ.name">
+
       
       
                   <!-- <img [src]="'/images/' + product.imageurl.replace('/images', '')" [alt]="product.name"> -->

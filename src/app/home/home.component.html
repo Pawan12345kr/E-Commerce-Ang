@@ -8,7 +8,8 @@
     <div class="product_list">
       <div class="category-card" *ngFor="let categ of category" (click)="viewProducts(categ.id)">
         <div class="image_left">
-            <img [src]="'http://localhost:5156' + categ.imageUrl" alt="categ.name">
+            <!-- <img [src]="'http://localhost:5156' + categ.imageUrl" alt="categ.name"> -->
+            <img [src]="categ.imageUrl == 'https://example.com/example.jpg' ?  'category.svg' : 'http://localhost:5156' + categ.imageUrl" alt="categ.name">
         </div>
         <div class="category_right">
             <h3>{{ categ.name }}</h3>
@@ -27,7 +28,10 @@
         <div class="image_container" [routerLink]="['product/',product.id]">
             <!-- <img src="{{product.imageUrl}}" alt="{{product.name}}"> -->
             <!-- <img src="productimage(headphone).png" alt="{{product.name}}"> -->
-            <img [src]="'http://localhost:5156' + product.imageUrl" alt="Product Image">
+            <!-- <img [src]="'http://localhost:5156' + product.imageUrl" alt="Product Image"> -->
+            <!-- <img [src]="'apple.svg'" alt="categ.name"> -->
+            <img [src]="product.imageUrl == 'https://example.com/example.jpg' ?  'apple.svg' : 'http://localhost:5156' + product.imageUrl" alt="categ.name">
+
 
 
             <!-- <img [src]="'/images/' + product.imageurl.replace('/images', '')" [alt]="product.name"> -->
