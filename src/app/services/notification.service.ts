@@ -51,7 +51,7 @@ export class NotificationService {
         this.imageSrc = "warn.svg";
       }
 
-    
+    notificationDiv.remove();
     // let imageSrc = status == "good" ? "tick.svg" : "warning.svg";
     notificationDiv.innerHTML = `
           <div class="ContentContainer">

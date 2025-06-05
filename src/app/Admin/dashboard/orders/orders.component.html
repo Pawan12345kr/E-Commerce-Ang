@@ -1,1 +1,48 @@
-<p>orders works!</p>
+<div class="RootProductsContainer"> 
+    <div class="AllProductsListContainer">
+        <div class="AddNewProductContainer">
+            <h2>All Orders</h2>
+        </div>
+        <div class="AllproductsSubContainer" *ngIf="AllOrders.length > 0; else noProducts">
+        <ul>
+        <li *ngFor="let order of AllOrders" class="productitemlist">
+            <div class="productDetailsDiv" title="{{order.orderDate}}">
+                <h3 >{{ order.orderDate | date : 'short' }}</h3>
+                <p><strong>Payment Method :</strong> {{ order.address }}</p>
+                <p><strong>Payment Method :</strong> {{ order.paymentMethod }}</p>
+                <!-- <p [ngStyle]="{ 'color': order.status == 'Pending' ? 'orange' : 'green' }"><strong>status : {{order.status}}</strong></p> -->
+            </div>
+            <div class="ProductActionsContainer">
+                <button class="ActionButton color2" (click)="OpenStatusChangePopup(order.id)">{{order.status}} <img src="edit.svg" style="object-fit: cover; width:20px; height:20px; padding-left:10px;padding:1px 1px;" alt=""></button>
+            </div>
+        </li>
+        </ul>
+        </div>
+        <ng-template #noProducts>
+            <p>No products available.</p>
+        </ng-template>
+    </div>
+</div>
+
+
+
+<!-- 
+<div class="RootProductsContainer">
+    <div class="AllproductsSubContainer">
+        <h3>All Orders </h3>
+        <div class="OrderspanContainer">
+            <div class="OrderDetailsDiv" *ngFor="let order of AllOrders">
+                <div class="orderlist">
+                    <span title="{{order.orderDate | date :'medium'}}">{{order.orderDate | date:'fullDate' }}</span>
+                    <span>{{order.paymentMethod}}</span>
+                    <span>{{order.address}}</span>
+                    <span>{{order.totalPrice}}</span>
+                    <span>{{order.status}}</span>
+                    <button>status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ -->

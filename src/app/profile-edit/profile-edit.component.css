@@ -1,0 +1,62 @@
+.ProfileEditContainer{
+    width: 100%;
+    height: 80vh;
+    margin-top: 90px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span{
+    width:100%;
+    text-align: center;
+}
+.SecondaryContainer{
+    width: 95%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: aqua;
+}
+
+.inputBoxes{
+    background-color: blueviolet;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.inputboxes_left, .inputboxes_left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 40%;
+}
+
+input{
+    padding: 10px 20px;
+    width: 80%;
+}
+
+.buttonCont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 20px;
+}
+
+button{
+    width: 30%;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+}

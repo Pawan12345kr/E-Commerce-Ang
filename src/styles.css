@@ -100,15 +100,13 @@
   /* background-color: aqua; */
   height: 70%;
 }
-
-  /* Optional Fade Animation
-  @keyframes fadeInOut {
+@keyframes fadeInOut {
     0% { opacity: 0; transform: translateX(10px) scale(0.9); }
     10% { opacity: 1; transform: translateX(0) scale(1); }
     90% { opacity: 1; transform: translateX(0) scale(1); }
     100% { opacity: 0; transform: translateX(10px) scale(0.9); }
-  }
-   */
+}
+  
 
 #MasterContainer{
     display: flex;
@@ -294,8 +292,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
-    z-index: 20000; /* Ensure it's behind the popup but above everything else */
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 20000;
 }
 
 .PopupContainer {
@@ -366,3 +364,80 @@
 }
 
 /* popupstyles end */
+
+
+
+
+
+
+/* second popup made for orders form admin */
+
+/* StatusChangePopupContainer */
+
+.PopupOverLayBG{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.514); 
+    z-index: 2000;
+}
+
+.StatusChangePopupContainer{
+  position: fixed;
+  top: 40%;
+  left: 35%;
+  z-index:2001;
+  width: 400px;
+  height: 200px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: black;
+  text-align: center;
+  border: 1px solid grey;
+  backdrop-filter: blur(10px);
+}
+
+.StatusChangePopupContainer h4{
+  text-align: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+.inputContainerforradio{
+  width:90%;
+  height: 35%;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.inputContainerforradio span{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  gap: 5px;
+}
+
+#updatebutton{
+  border: none;
+  border-radius: 10px;
+  width: 40%;
+  padding:7px 20px;
+  font-size: large;
+  background-color: rgb(84, 254, 180);
+}
+#CancelButton{
+  border: none;
+  border-radius: 10px;
+  width: 40%;
+  padding:7px 20px;
+  font-size: large;
+  background-color: rgba(255, 20, 20, 0.801);
+}
+
+
+

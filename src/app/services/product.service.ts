@@ -21,7 +21,7 @@ export interface Product {
 })
 export class ProductService {
   private apiUrl = 'http://localhost:5156/api/categories';
-  private productUrl = 'http://localhost:5156/api/Product/GetAllProducts';
+  private productUrl = 'http://localhost:5156/api/Product/GetAllProductsforCustomer';
   // private Productdetailsurl = "http://localhost:5156/api/Product/productdetails";
 
   constructor(private http: HttpClient) {}

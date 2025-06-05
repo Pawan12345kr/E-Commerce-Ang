@@ -18,6 +18,8 @@ import { CategoriesComponent } from './Admin/dashboard/categories/categories.com
 import { AddProductComponent } from './Admin/dashboard/add-product/add-product.component';
 import { AddCategoryComponent } from './Admin/dashboard/add-category/add-category.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderConfirmComponent } from './order-confirm/order-confirm.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent }, 
     {path: 'register', component: RegisterComponent},
@@ -26,8 +28,10 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent}, 
     {path: 'cart', component: CartComponent},
     {path: 'orderhistory', component: OrderHistoryComponent},
+    {path:'orderconfirm',component:OrderConfirmComponent},
     {path: 'order', component: OrderComponent},
     {path: 'profile', component: ProfileComponent},
+    {path : 'profileedit', component:ProfileEditComponent},
     {path : 'admin',
     component:DashboardComponent,
     children:[

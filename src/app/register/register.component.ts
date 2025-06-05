@@ -13,7 +13,7 @@ import { NotificationService } from '../services/notification.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-      Fullname = ''; 
+      Fullname = '';
       Address ='';
       email = '';
       password = '';
@@ -22,23 +22,32 @@ export class RegisterComponent {
       constructor(private authService: AuthService,
         private notification : NotificationService, private route: Router)
       {
-
+      }
+      get isValidPassword(): boolean { return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.@#$%^&*!]).{6,}$/.test(this.password);
+      }
+      get isValidPincode(): boolean {
+        return /^[1-9][0-9]{5}$/.test(this.Pincode);
+      }
+      get isValidPhoneNumber(): boolean {
+        return /^[6-9][0-9]{9}$/.test(this.PhoneNumber);
       }
       register()
       {
+        if (!this.isValidPassword || !this.isValidPincode || !this.isValidPhoneNumber || !this.Address || !this.Fullname || !this.email) {
+          this.notification.ShowMessage("All fields are required", "warn", 3000);
+          return;
+        }
         this.authService.register(this.Fullname, this.Address, this.email, this.password, this.Pincode, this.PhoneNumber).subscribe(
           response =>{
             console.log('Register success', response);
       this.notification.ShowMessage("Registration Successful","good",3000);
-
-            // alert('Registration Successful');
+ 
+           
             this.route.navigate(['/login']);
           },
           error =>{
             console.error('Registration failed', error);
             this.notification.ShowMessage(`Registration failed ${error.message}`,"notify",3000);
-
-            // alert('Registration failed');
           }
         );
       }

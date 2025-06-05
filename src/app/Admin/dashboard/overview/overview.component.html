@@ -1,39 +1,40 @@
 <div class="OverViewContainer">
     <div class="SecondaryContainerOverview">
         <div class="OverviewBox">
-            <span class="HeadingSpanContainer">Total Reveneue</span>
-            <span class="ContentSpanBox">₹234567</span>
+            <span class="HeadingSpanContainer boldhead">Revenue</span>
+            <span class="ContentSpanBox">₹<p>{{TotalRevenue}}</p></span>
             <span class="ButtonSpanBox">
-                <button>Button</button>
+                <button [routerLink]="['/admin/Orders/']">View all<img src="rightarrow.svg" style="padding-left:10px;" width="25px" height="25px" alt=""></button>
+            </span>
+        </div>
+        
+        <div class="OverviewBox">
+            <span class="HeadingSpanContainer boldhead">Products</span>
+            <span class="ContentSpanBox greencolor">{{totalProduct}}</span>
+            <span class="ButtonSpanBox">
+                <button [routerLink]="['/admin/Products/']">View all<img src="rightarrow.svg" style="padding-left:10px;" width="25px" height="25px" alt=""></button>
             </span>
         </div>
         <div class="OverviewBox">
+            <span class="HeadingSpanContainer">Categories</span>
+            <span class="ContentSpanBox greencolor">{{totalcategories}}</span>
+            <span class="ButtonSpanBox">
+                <button [routerLink]="['/admin/Categories/']">View all<img src="rightarrow.svg" style="padding-left:10px;" width="25px" height="25px" alt=""></button>
+            </span>
+        </div>
+        <!-- <div class="OverviewBox">
             <span class="HeadingSpanContainer">Total Reveneue</span>
             <span class="ContentSpanBox">₹234567</span>
             <span class="ButtonSpanBox">
                 <button>Button</button>
             </span>
-        </div>
-        <div class="OverviewBox">
+        </div> -->
+         <!-- <div class="OverviewBox">
             <span class="HeadingSpanContainer">Total Reveneue</span>
             <span class="ContentSpanBox">₹234567</span>
             <span class="ButtonSpanBox">
                 <button>Button</button>
             </span>
-        </div>
-        <div class="OverviewBox">
-            <span class="HeadingSpanContainer">Total Reveneue</span>
-            <span class="ContentSpanBox">₹234567</span>
-            <span class="ButtonSpanBox">
-                <button>Button</button>
-            </span>
-        </div>
-        <div class="OverviewBox">
-            <span class="HeadingSpanContainer">Total Reveneue</span>
-            <span class="ContentSpanBox">₹234567</span>
-            <span class="ButtonSpanBox">
-                <button>Button</button>
-            </span>
-        </div>
+        </div> -->
     </div>
 </div>

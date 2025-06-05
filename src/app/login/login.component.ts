@@ -15,21 +15,27 @@ import { NotificationService } from '../services/notification.service';
 export class LoginComponent {
     email = '';
     password = '';
-    // IsAdmin = false;
-    constructor(private authService: AuthService, 
-      private router: Router,
-      private notification : NotificationService)
-    {}
+    constructor(private authService: AuthService,
+                private router: Router,
+                private notification : NotificationService){}
     login() {
+      if(!this.email)
+      {
+        this.notification.ShowMessage("Please enter email","warn",3000);
+        return;
+      }
+      else if(!this.password)
+      {
+        this.notification.ShowMessage("Please enter password","warn",3000);
+        return;
+      }
       this.authService.login(this.email, this.password).subscribe(
         response => {
           console.log('Login successful:', response);
           this.notification.ShowMessage("Login Successful !","good",3000);
-          // alert('Login Successful! Redirecting...');
           console.log("role of user : " , response.role);
           if(response.role == "Admin")
           {
-              // this.IsAdmin = true;
               sessionStorage.setItem("Role",response.role);
           };
           this.router.navigate(['']);
@@ -37,7 +43,6 @@ export class LoginComponent {
         error => {
           console.error('Login failed:', error);
           this.notification.ShowMessage("Invalid credentials, try again !","notify",3000);
-          // alert('Invalid credentials. Try again.');
         }
       );
     }

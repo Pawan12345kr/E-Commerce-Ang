@@ -51,14 +51,14 @@ export class AddProductComponent  implements OnInit{
         // console.log(prod);
         this.buttontitle = 'Update';
         this.NewProduct = {
-          id:  prod.id ?? this.NewProduct.id,
-          name:  prod.name ?? this.NewProduct.name ,
-          description:  prod.description ?? this.NewProduct.description,
-          price: prod.price ?? (this.NewProduct.price),
-          stock: prod.stock ?? this.NewProduct.stock ,
-          brand: prod.brand ?? this.NewProduct.brand,
-          imageUrl: prod.imageUrl ?? this.NewProduct.imageUrl,
-          categoryId: prod.categoryId ?? this.NewProduct.categoryId
+            id:  prod.id,
+            name:  prod.name ?? this.NewProduct.name ,
+            description:  prod.description ?? this.NewProduct.description,
+            price: prod.price ?? (this.NewProduct.price),
+            stock: prod.stock ?? this.NewProduct.stock ,
+            brand: prod.brand ?? this.NewProduct.brand,
+            imageUrl: prod.imageUrl ?? this.NewProduct.imageUrl,
+            categoryId: prod.categoryId ?? this.NewProduct.categoryId
         }
       }
     )
@@ -90,7 +90,6 @@ export class AddProductComponent  implements OnInit{
           () => {
               this.notification.ShowMessage("Product updated successfully!", "good",3000);
               this.router.navigateByUrl('/admin/Products');
-
           },
           (error) => {
               console.error("Error updating product:", error);

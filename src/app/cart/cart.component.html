@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <span id="backbutton">
-  <img id="backimage" src="arrow-left-svgrepo-com.svg" [routerLink]="'profile/'" alt="back">
+  <img id="backimage" src="arrow-left-svgrepo-com.svg" [routerLink]="''" alt="back">
 </span>
 <div class="CartContainerRoot">
   <div id="EmptyCartContainer" *ngIf="cartItems?.length === 0">
@@ -13,7 +13,6 @@
   </div>
   
   <div *ngIf="cartItems.length > 0">
-
     <div class="CartItemsContainer">
         <div class="CartProducts" *ngFor="let item of cartItems">
             <div class="checkboxcontainer">
@@ -31,6 +30,7 @@
                 <div class="ProductDetail">
                     <span id="productname">{{ item?.name }}</span>
                 </div>
+                <span id="productname">{{ item?.quantity }}</span>
 
                 <div class="SecondaryContainer">
                     <div class="ButtonContainer">

@@ -68,6 +68,7 @@
             <p class="TotalBill">Total Bill: ₹</p>
             <p class="PriceTo">{{ orderData.totalPrice }}</p>
         </span>
+        <button class="CancelButton" (click)="cancelandredirect()">Cancel</button>
         <button class="ConfirmButton" (click)="placeOrder()">Confirm Order</button>
     </div>
   </div>

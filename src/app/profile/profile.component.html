@@ -8,7 +8,7 @@
     </div>
 
     <div class="ContentSideContentContainer">
-        <!-- <router-outlet></router-outlet> -->
+        <!-- <router-outlet></router-outlet> --> 
         <h2 class="HeadingProfile">Profile Details</h2>
         <div class="InsideContainer" *ngIf="userInfo; else noUser">
             <img id="profileimage" src="user2.svg" alt="">
@@ -19,7 +19,7 @@
                 <p id="Pincode"><strong>Pincode :</strong> {{ userInfo.pincode }}</p>
                 <p id="MobileNumber"><strong>Mobile Number :</strong> {{ userInfo.mobile }}</p>
                 <!-- <hr/> -->
-                <img id="editbuttonicon" src="edit.svg" alt="">
+                <img id="editbuttonicon" (click)="navigateToEditPage()" src="edit.svg" alt="">
             </div>
         </div>
         <ng-template #noUser>

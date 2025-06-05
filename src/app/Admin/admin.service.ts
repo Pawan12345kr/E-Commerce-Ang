@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AdminService {
 
-  private getproducts_url = "http://localhost:5156/api/Product/GetAllProducts";
+  private getproducts_url = "http://localhost:5156/api/Product/GetAllProductsforAdmin";
   private getcategory_url = "http://localhost:5156/api/Categories";
   private getproductbyid_url = "http://localhost:5156/api/Product/GetProductByProductId";
   private getcategorybyid_url = "http://localhost:5156/api/Categories";
@@ -23,6 +23,7 @@ export class AdminService {
   GetCategoryByIdForAdmin(id : any){
     return this.http.get(`${this.getcategorybyid_url}/${id}`);
   }
+  
   GetProductDetailsById(id: any){
     return this.http.get(`${this.getproductbyid_url}/${id}`);
   }

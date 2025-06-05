@@ -54,7 +54,6 @@ export class OrderComponent {
     console.log("Received Order Data:", this.orderData);
     if (!this.orderData) {
       this.notification.ShowMessage("No items selected. Redirecting to cart.","info",3000);
-
       // alert("No items selected. Redirecting to cart.");
       this.router.navigate(['/cart']);
       return;
@@ -81,7 +80,6 @@ export class OrderComponent {
         } else {
           // alert("User address not found. Please update your profile.");
         this.notification.ShowMessage("User address not found. Please update your profile.","notify",3000);
-
         }
       },
       error: (error) => {
@@ -98,10 +96,18 @@ export class OrderComponent {
   placeOrder() {
     this.errorMessages = { address: '', pincode: '', paymentMethod: '' };
   
-    if (!this.address.trim()) this.errorMessages.address = "Address is required.";
-    if (!this.pincode.trim()) this.errorMessages.pincode = "Pincode is required.";
-    if (!this.paymentMethod.trim()) this.errorMessages.paymentMethod = "Please select a payment method.";
-  
+    if (!this.address.trim()) {
+      this.errorMessages.address = "Address is required.";
+      this.notification.ShowMessage("Address is required.",'notify',3000);
+    }
+    if (!this.pincode.trim()) {
+      this.errorMessages.pincode = "Pincode is required.";
+      this.notification.ShowMessage("Pincode is required.",'notify',3000);
+    }
+    if (!this.paymentMethod.trim()) {
+      this.errorMessages.paymentMethod = "Please select a payment method.";
+      this.notification.ShowMessage("Please select a payment method.",'notify',3000);
+    }
     if (Object.values(this.errorMessages).some(msg => msg)) return;
   
     const token = this.authService.getToken(); // ✅ Retrieve JWT token
@@ -129,7 +135,11 @@ export class OrderComponent {
         this.notification.ShowMessage("Your order has been placed!","good",3000);
 
         this.orderData.selectedItems = [];
-        this.router.navigate(["/home"]);
+        this.router.navigate(['/orderconfirm'], {
+          queryParams: {
+            orderData: JSON.stringify(orderPayload)
+          }
+        });
       },
       error: (error) => {
         console.error("Order placement failed:", error);
@@ -137,6 +147,10 @@ export class OrderComponent {
         // alert(`Failed to place order: ${error.error?.message}`);
       }
     });
+  }
+
+  cancelandredirect(){
+    this.router.navigateByUrl('cart')
   }
   
 }

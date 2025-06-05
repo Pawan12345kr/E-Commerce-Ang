@@ -4,35 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { HeaderComponent } from '../header/header.component';
 import { NotificationService } from '../services/notification.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
-
-// interface OrderItem {
-//   productName: string;
-//   quantity: number;
-//   price: number;
-// }
-
-// interface Order {
-//   orderDate: string;
-//   paymentMethod: string;
-//   status: string;
-//   address: string;
-//   orderItems: OrderItem[];
-// }
-
-// interface UserInfo {
-//   success: boolean;
-//   name: string;
-//   email: string;
-//   address: string;
-//   pincode: string;
-//   mobile: string;
-// }
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-profile',
-  imports: [HeaderComponent, CommonModule,RouterOutlet,RouterLink],
+  imports: [HeaderComponent, CommonModule,RouterLink],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -42,7 +19,9 @@ export class ProfileComponent {
   orders :any = [];
 
   constructor(private authService: AuthService,
-    private notification : NotificationService, private http: HttpClient) {}
+    private notification : NotificationService, 
+    private router : Router,
+    private http: HttpClient) {}
 
   ngOnInit() {
     // this.authService.isLoggedIn$.subscribe(status => {
@@ -87,30 +66,11 @@ export class ProfileComponent {
     });
   }
 
-  // private fetchUserOrders() {
-  //   const apiUrl = `http://localhost:5156/api/Order/userorders`;
-  //   const token = this.authService.getToken();
-
-  //   this.http.get<{ success: boolean; orders: any }>(apiUrl, {
-  //     headers: token ? { Authorization: `Bearer ${token}` } : {}, 
-  //     withCredentials: true
-  //   }).subscribe({
-  //     next: (response) => {
-  //       console.log("Order response:", response);
-
-  //       if (response.success && response.orders && Array.isArray(response.orders)) { 
-  //         this.orders = response.orders; 
-  //         console.log("Orders successfully assigned:", this.orders);
-  //       } else {
-  //         console.error("No orders found.");
-  //       }
-  //     },
-  //     error: (error) => {
-  //       console.error("Error fetching user orders:", error);
-  //       this.notification.ShowMessage("Failed to retrieve order history.","warn",3000);
-
-  //       // alert("Failed to retrieve order history.");
-  //     }
-  //   });
-  // }
+  navigateToEditPage(){
+    this.router.navigate(['/profileedit'],{
+      queryParams : {
+        userdetails : JSON.stringify(this.userInfo)
+      }
+    })
+  }
 }

@@ -1,0 +1,22 @@
+<app-header></app-header>
+
+<div class="ProfileEditContainer">
+    <div class="SecondaryContainer">
+        <span class="heading">Edit Profile</span>
+        <div class="inputBoxes">
+            <div class="inputboxes_left">
+                <input [(ngModel)]="user_info.name" type="text">
+                <input [(ngModel)]="user_info.email" type="text">
+                <input [(ngModel)]="user_info.address" type="text">
+            </div>
+            <div class="inputboxes_left">
+                <input [(ngModel)]="user_info.pincode" type="text">
+                <input [(ngModel)]="user_info.mobile" type="text">
+            </div>
+        </div>
+        <div class="buttonCont">
+            <button [routerLink]="['/profile']">cancel</button>
+            <button (click)="updateUserInfo()">update</button>
+        </div>
+    </div>
+</div>
