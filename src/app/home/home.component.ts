@@ -76,7 +76,7 @@ export class HomeComponent {
 
   
   GetAllProducts() {
-     fetch('http://localhost:5156/api/Product/GetAllProducts')
+     fetch('http://localhost:5156/api/Product/GetAllProductsforCustomer')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

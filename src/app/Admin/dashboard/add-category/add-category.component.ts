@@ -39,6 +39,10 @@ export class AddCategoryComponent {
     
 // editing the product by getting the id from thr url using active route
     const catid = this.route.snapshot.paramMap.get("id");
+    if(catid == null)
+    {
+        return;
+    }
     // console.log(productid);
     this.adminservice.GetCategoryByIdForAdmin(catid).subscribe(
       (prod : any) =>{

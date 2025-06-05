@@ -45,6 +45,10 @@ export class AddProductComponent  implements OnInit{
     
 // editing the product by getting the id from thr url using active route
     const productid = this.route.snapshot.paramMap.get("id");
+    if(productid == null)
+    {
+      return;
+    }
     // console.log(productid);
     this.adminservice.GetProductDetailsById(productid).subscribe(
       (prod : any) =>{
