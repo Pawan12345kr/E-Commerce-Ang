@@ -2,7 +2,7 @@
     <div class="AddNewProductContainer">
         <span id="totalplusrefresh">
             <button class="RefreshProducts" (click)="GetAllCategories()"><img src="refresh.svg" id="refreshimage" alt=""></button>
-            <h2 id="totalproducts">TotalProducts : {{ AllCategories.length}} </h2>
+            <h2 id="totalproducts">Total Categories : {{ AllCategories.length}} </h2>
         </span>
         <!-- <button id="AddProduct" [routerLink]="['/admin/addproduct']">Add product</button> -->
         <button id="AddProduct" [routerLink]="['/admin/addcategory']">Add Category</button>

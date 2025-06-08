@@ -19,6 +19,7 @@
     height:auto;
     padding: 20px 20px;
   }
+
   .category-card {
     /* position: relative; */
     width: auto;
@@ -40,7 +41,7 @@
     /* backdrop-filter: blur(10px);  */
     /* -webkit-backdrop-filter: blur(15px); */
     border: 0.1ex solid rgba(0, 0, 0, 0.3); 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .category-card:hover{

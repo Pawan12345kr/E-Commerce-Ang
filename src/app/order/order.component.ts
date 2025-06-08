@@ -37,16 +37,11 @@ export class OrderComponent {
     private notification : NotificationService, private authService: AuthService) {}
 
   ngOnInit() {
-    // this.authService.isLoggedIn$.subscribe(status => {
-    //   this.isLoggedIn = status;
-    // });
-
     if (this.authService.isAuthenticated()) {
       this.isLoggedIn = true;
     }
     else{
       this.notification.ShowMessage("You need to log in to place an order!","notify",3000);
-      // alert("You need to log in to place an order!");
       this.router.navigate(['/login']);
       return;
     }
@@ -54,20 +49,16 @@ export class OrderComponent {
     console.log("Received Order Data:", this.orderData);
     if (!this.orderData) {
       this.notification.ShowMessage("No items selected. Redirecting to cart.","info",3000);
-      // alert("No items selected. Redirecting to cart.");
       this.router.navigate(['/cart']);
       return;
     }
-
-    history.pushState(null, '', location.href);
-    window.onpopstate = () => history.pushState(null, '', location.href);
 
     this.loadUserAddress();
   }
 
   loadUserAddress() {
     const apiUrl = `http://localhost:5156/api/Account/address`;
-    const token = this.authService.getToken(); //Retrieve JWT token
+    const token = this.authService.getToken();
   
     return this.http.get<{ success: boolean; address: string; pincode: string }>(apiUrl, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -78,20 +69,15 @@ export class OrderComponent {
           this.address = response.address;
           this.pincode = response.pincode;
         } else {
-          // alert("User address not found. Please update your profile.");
         this.notification.ShowMessage("User address not found. Please update your profile.","notify",3000);
         }
       },
       error: (error) => {
         console.error("Failed to load address:", error);
         this.notification.ShowMessage("User address retrieval failed.","info",3000);
-
-        // alert("User address retrieval failed.");
       }
     });
   }
-  
-  
 
   placeOrder() {
     this.errorMessages = { address: '', pincode: '', paymentMethod: '' };
@@ -99,18 +85,20 @@ export class OrderComponent {
     if (!this.address.trim()) {
       this.errorMessages.address = "Address is required.";
       this.notification.ShowMessage("Address is required.",'notify',3000);
+      return;
     }
     if (!this.pincode.trim()) {
       this.errorMessages.pincode = "Pincode is required.";
       this.notification.ShowMessage("Pincode is required.",'notify',3000);
+      return;
     }
     if (!this.paymentMethod.trim()) {
       this.errorMessages.paymentMethod = "Please select a payment method.";
       this.notification.ShowMessage("Please select a payment method.",'notify',3000);
+      return;
     }
-    if (Object.values(this.errorMessages).some(msg => msg)) return;
-  
-    const token = this.authService.getToken(); // ✅ Retrieve JWT token
+    
+    const token = this.authService.getToken(); 
   
     const orderPayload = {
       address: this.address,
@@ -127,7 +115,7 @@ export class OrderComponent {
     console.log("Order payload:", orderPayload);
   
     this.http.post("http://localhost:5156/api/Order/createorder", orderPayload, {
-      headers: token ? { Authorization: `Bearer ${token}` } : {}, // ✅ Attach JWT token
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
       withCredentials: true
     }).subscribe({
       next: () => {

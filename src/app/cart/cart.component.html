@@ -14,7 +14,7 @@
   
   <div *ngIf="cartItems.length > 0">
     <div class="CartItemsContainer">
-        <div class="CartProducts" *ngFor="let item of cartItems">
+        <div class="CartProducts" *ngFor="let item of cartItems" >
             <div class="checkboxcontainer">
                 <!-- <input type="checkbox" (change)="toggleSelection(item.id)" /> -->
                 <label class="checkbox-btn">
@@ -30,11 +30,11 @@
                 <div class="ProductDetail">
                     <span id="productname">{{ item?.name }}</span>
                 </div>
-                <span id="productname">{{ item?.quantity }}</span>
 
                 <div class="SecondaryContainer">
                     <div class="ButtonContainer">
                         <button class="decrease" (click)="decreaseQuantity(item.id)">-</button>
+                        <span id="productname">{{ item?.quantity }}</span>
                         <button class="increase" (click)="increaseQuantity(item.id)">+</button>
                     </div>
                     <div class="PriceContainer">

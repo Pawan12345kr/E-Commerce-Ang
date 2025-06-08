@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { OrderComponent } from '../order/order.component';
 import {tap} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs'; 
@@ -57,22 +56,19 @@ export class CartComponent {
     return this.http.get<any[]>(apiUrl, {
       headers: token ? { Authorization: `Bearer ${token}` } : {}, 
       withCredentials: true
-    }).pipe(
-      tap(items => {
+      }).subscribe({
+        next : (items => {
         this.cartItems = items || [];
         console.log("Loaded cart items:", this.cartItems);
       }),
-      catchError(error => {
+      error : (error => {
         console.error("Cart API Error:", error);
         this.notification.ShowMessage("Failed to fetch cart. Please try again.","warn",3000);
-
-        // alert("Failed to fetch cart. Please try again.");
         return throwError(() => error);
       })
-    ).subscribe();
+    });
   }
-  
-  
+
   increaseQuantity(cartItemId: number) {
     const item = this.cartItems.find(ci => ci.id === cartItemId);
     if (item) {
@@ -113,13 +109,10 @@ export class CartComponent {
           item.quantity = newQuantity;
           item.total = item.quantity * item.price;
         }
-        // console.log("super da");
       },
       error: (error) => {
         console.error("API Error:", error);
         this.notification.ShowMessage("Failed to update quantity.","warn",3000);
-
-        // alert("Failed to update quantity.");
       }
     });
   }

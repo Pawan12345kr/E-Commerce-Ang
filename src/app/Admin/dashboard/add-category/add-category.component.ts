@@ -1,3 +1,94 @@
+// import { Component } from '@angular/core';
+// import { AdminService } from '../../admin.service';
+// import { HttpClient } from '@angular/common/http';
+// import { NotificationService } from '../../../services/notification.service';
+// import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+// import { FormsModule } from '@angular/forms';
+// import { AuthService } from '../../../services/auth.service';
+ 
+// @Component({
+//   selector: 'app-add-category',
+//   imports: [FormsModule,RouterLink],
+//   templateUrl: './add-category.component.html',
+//   styleUrl: './add-category.component.css'
+// })
+// export class AddCategoryComponent {
+//   buttontitle = 'Add';
+//   AllCategories : any = [];
+//   NewCategory = {
+//       id: 0,
+//       name: '',
+//       description:'' ,
+//       imageUrl: '',
+//   };
+ 
+//   constructor(private adminservice : AdminService,
+//     private http :HttpClient,
+//     private router : Router,
+//     private notification: NotificationService,
+//     private route : ActivatedRoute,
+//     private authservice : AuthService
+//   ){}
+//   ngOnInit(){
+//     const catid = this.route.snapshot.paramMap.get("id");
+//     if(catid)
+//     {
+//       this.adminservice.GetCategoryByIdForAdmin(catid).subscribe(
+//         (prod : any) =>{
+//           this.buttontitle = 'Update';
+//           this.NewCategory = {
+//             id:  prod.id ?? this.NewCategory.id,
+//             name:  prod.name ?? this.NewCategory.name ,
+//             description:  prod.description ?? this.NewCategory.description,
+//             imageUrl: prod.imageUrl ?? this.NewCategory.imageUrl
+//           };
+//         },
+//         (error) => console.error("Error fetching category details", error));
+//     }
+//   }
+//   validateCategory(): boolean {
+//     if(!this.NewCategory.name.trim() || !this.NewCategory.description.trim())
+//     {
+//       this.notification.ShowMessage("All fields except image must be filled correctly!", "warn", 3000);
+//       return false;
+//     }
+//     return true;
+//   }
+ 
+//   AddOrUpdateCategory(){
+//     if(!this.validateCategory()) return;
+//     const token = this.authservice.getToken();
+   
+//     const formdata = new FormData();
+//     formdata.append('name',this.NewCategory.name);
+//     formdata.append('description',this.NewCategory.description);
+ 
+//     if(this.NewCategory.imageUrl){
+//       formdata.append('ImageFile',this.NewCategory.imageUrl)
+//     }
+ 
+//     const apiUrl = this.NewCategory.id ? `http://localhost:5156/api/categories/${this.NewCategory.id}` : 'http://localhost:5156/api/Categories';
+   
+//     const requestMethod = this.NewCategory.id ? this.http.put : this.http.post;
+//     requestMethod.call(this.http, apiUrl, formdata, {
+//       headers: token ? {Authorization : `Bearer ${token}`} : {},
+//       withCredentials: true
+//     }).subscribe(()=>
+//     {
+//       this.notification.ShowMessage(
+//         this.NewCategory.id ? "Product updated successfully!" : "Product added successfully!","good",3000);
+//     });
+//   }
+//   onFileSelected(event: any) {
+//     const file = event.target.files[0];
+//     console.log(file);
+//     this.NewCategory.imageUrl = file;
+//   }
+// }
+
+
+
+
 import { Component } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { HttpClient } from '@angular/common/http';
@@ -39,39 +130,33 @@ export class AddCategoryComponent {
     
 // editing the product by getting the id from thr url using active route
     const catid = this.route.snapshot.paramMap.get("id");
-    if(catid == null)
+    if(catid)
     {
-        return;
-    }
-    // console.log(productid);
-    this.adminservice.GetCategoryByIdForAdmin(catid).subscribe(
-      (prod : any) =>{
-        // console.log(prod);
-        this.buttontitle = 'Update';
-        this.NewCategory = {
-          id:  prod.id ?? this.NewCategory.id,
-          name:  prod.name ?? this.NewCategory.name ,
-          description:  prod.description ?? this.NewCategory.description,
-          imageUrl: prod.imageUrl ?? this.NewCategory.imageUrl,
+      this.adminservice.GetCategoryByIdForAdmin(catid).subscribe(
+        (prod : any) =>{
+          // console.log(prod);
+          this.buttontitle = 'Update';
+          this.NewCategory = {
+            id:  prod.id ?? this.NewCategory.id,
+            name:  prod.name ?? this.NewCategory.name ,
+            description:  prod.description ?? this.NewCategory.description,
+            imageUrl: prod.imageUrl ?? this.NewCategory.imageUrl,
+          }
         }
-      }
-    )
-
-  // const product = history.state.product;
-  //   if (product) {
-  //       // Ensure values are set correctly
-  //       this.NewProduct.id = product.id ?? this.NewProduct.id;
-  //       this.NewProduct.name = product.name ?? this.NewProduct.name;
-  //       this.NewProduct.description = product.description ?? this.NewProduct.description;
-  //       this.NewProduct.price = product.price ?? this.NewProduct.price;
-  //       this.NewProduct.stock = product.stock ?? this.NewProduct.stock;
-  //       this.NewProduct.brand = product.brand ?? this.NewProduct.brand;
-  //       this.NewProduct.imageUrl = product.imageUrl ?? this.NewProduct.imageUrl;
-  //       this.NewProduct.categoryId = product.categoryId ?? this.NewProduct.categoryId;
-  //   }
+      )
+    }    
   }
 
-  AddNewCategory(){
+  validateCategory(): boolean {
+    if(!this.NewCategory.name.trim() || !this.NewCategory.description.trim())
+    {
+      this.notification.ShowMessage("All fields must be filled correctly!", "warn", 3000);
+      return false;
+    }
+    return true;
+  }
+
+  AddOrUpdateCategory(){
     const token = this.authservice.getToken();
     console.log(this.NewCategory);
 

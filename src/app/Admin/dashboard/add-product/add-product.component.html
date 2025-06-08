@@ -30,7 +30,7 @@
                     
                     <span class="LabelInputJoin">
                         <label for="productdescription">Description:</label>
-                        <textarea id="productdescription" name="productdescription" [(ngModel)]="NewProduct.description"  required ></textarea>
+                        <textarea id="productdescription" name="productdescription" (keydown.enter)="AddOrUpdateProduct()" [(ngModel)]="NewProduct.description"  required ></textarea>
                     </span>
                     
                     <span class="LabelInputJoin" >
@@ -49,7 +49,7 @@
                 </span>
                 <span class="ButtonContainerBox">
                     <button [routerLink]="['/admin/Products/']">Cancel</button>
-                    <button type="submit" (click)="AddNewProduct()">{{buttontitle}} Product</button>
+                    <button type="submit" id="AddNewProductBtn" (click)="AddOrUpdateProduct()">{{buttontitle}} Product</button>
                 </span>
             </div>
         </form>

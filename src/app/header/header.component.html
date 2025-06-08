@@ -35,6 +35,19 @@
                     <button *ngIf="IsAdmin" [routerLink]="['/admin/home']" class="SimpleButton BtnColor5" title="Admin"><img src="adminicon.svg" width="35px" height="30px" style="padding-right:10px;" alt="">Admin</button>
                     <button *ngIf="isLoggedIn" (click)="logout()" class="SimpleButton BtnColor3" title="Logout"><img src="logout.svg" height="30px" width="35px" style="padding-right:10px;" alt="">Logout</button>
                 </div>
+
+                <div class="Rootmenucontainer">
+                    <div class="burger" for="burger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <!-- <div class="nav_menu" id="menu">
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Contact</a>
+                    </div> -->
+                </div>
             </div> 
         </nav>
       </header> 

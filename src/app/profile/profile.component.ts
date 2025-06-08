@@ -67,7 +67,7 @@ export class ProfileComponent {
   }
 
   navigateToEditPage(){
-    this.router.navigate(['/profileedit'],{
+    this.router.navigate(['/profileEdit'],{
       queryParams : {
         userdetails : JSON.stringify(this.userInfo)
       }

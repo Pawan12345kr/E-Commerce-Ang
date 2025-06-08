@@ -4,69 +4,57 @@
   <div class="OrderPageSecondaryContainer">
     <h2 class="OrderTitle">Order Summary</h2>
     <hr>
+    
     <div class="AddressContainer">
         <span class="AddressSpan">
-            <label for="address" class="LabelforAddress">Delivery Address :</label>
-            <input id="address" type="text" [(ngModel)]="address" class="InputDeliAddress" placeholder="Enter your address"/>
-            <small class="text-danger" *ngIf="errorMessages.address">{{ errorMessages.address }}</small>
+            <label for="address">Delivery Address:</label>
+            <input id="address" type="text" [(ngModel)]="address" placeholder="Enter your address"/>
         </span>
           
         <span class="PincodeSpan">
-            <label for="pincode" class="LabelforPincode">Pincode :</label>
-            <input id="pincode" type="text" [(ngModel)]="pincode" class="InputPincode" placeholder="Enter pincode"/>
-            <small class="text-danger" *ngIf="errorMessages.pincode">{{ errorMessages.pincode }}</small>
-        </span>  
+            <label for="pincode">Pincode:</label>
+            <input id="pincode" type="text" [(ngModel)]="pincode" placeholder="Enter pincode"/>
+        </span> 
+        <div class="PaymentSelectContainer">
+          <h5>Select Payment Method:</h5>
+          <select [(ngModel)]="paymentMethod">
+              <option value="">-- Select Payment Method --</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Cash on Delivery">Cash on Delivery</option>
+          </select>
+        </div> 
     </div>
+
     <hr>
-
     <h5 class="BillDetailsTitle">Bill Details</h5>
-    <div class="ProductsFinalList">
-        <div class="HeadingsContainer">
-            <span id="ProductName" class="ElementBox">ProductName</span>
-            <span id="Quantity" class="ElementBox">Quantity</span>
-            <span id="Price" class="ElementBox">Price</span>
-        </div>
-        <div class="ContentContainer" *ngFor="let item of orderData.selectedItems">
-          <span id="names" class="ElementBox">{{ item.name }}</span>
-          <span id="quantities" class="ElementBox">{{ item.quantity }}</span>
-          <span id="prices" class="ElementBox">₹{{ item.price }}</span>
-        </div>
-        <div class="TotalPrice1">Total Amount: ₹{{ orderData.totalPrice }}</div>
 
-    </div>
-    <!-- <table class="table table-striped text-center">
-      <thead class="table-secondary">
-        <tr>
-          <th>Product Name</th>
-          <th>Quantity</th>
-          <th>Price</th>
-        </tr>
+    <table class="ProductsFinalList">
+      <thead>
+          <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+          </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of orderData.selectedItems">
-          <td class="fw-semibold">{{ item.name }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>${{ item.price }}</td>
-        </tr>
+          <tr *ngFor="let item of orderData.selectedItems">
+              <td>{{ item.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>₹{{ item.price }}</td>
+          </tr>
       </tbody>
-    </table> -->
-
-    <div class="PaymentSelectContainer">
-        <h5 class="SelectLabel">Select Payment Method:</h5>
-        <select [(ngModel)]="paymentMethod" class="SelectPaymentSelect">
-            <option value="">-- Select Payment Method --</option>
-            <option value="Credit Card">Credit Card</option>
-            <option value="Debit Card">Debit Card</option>
-            <option value="Cash on Delivery">Cash on Delivery</option>
-        </select>
-    </div>
-    <small class="text-danger" *ngIf="errorMessages.paymentMethod">{{ errorMessages.paymentMethod }}</small>
-
+      <tfoot>
+          <tr>
+              <td colspan="2">Total Amount:</td>
+              <td>₹{{ orderData.totalPrice }}</td>
+          </tr>
+      </tfoot>
+    </table>
 
     <div class="BottomConfirmContainer">
         <span class="TotalAmountFooter">
-            <p class="TotalBill">Total Bill: ₹</p>
-            <p class="PriceTo">{{ orderData.totalPrice }}</p>
+            <p>Total Bill: ₹{{ orderData.totalPrice }}</p>
         </span>
         <button class="CancelButton" (click)="cancelandredirect()">Cancel</button>
         <button class="ConfirmButton" (click)="placeOrder()">Confirm Order</button>

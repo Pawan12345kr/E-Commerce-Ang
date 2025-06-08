@@ -8,12 +8,12 @@
         <li *ngFor="let order of AllOrders" class="productitemlist">
             <div class="productDetailsDiv" title="{{order.orderDate}}">
                 <h3 >{{ order.orderDate | date : 'short' }}</h3>
-                <p><strong>Payment Method :</strong> {{ order.address }}</p>
+                <p><strong>Payment address :</strong> {{ order.address }}</p>
                 <p><strong>Payment Method :</strong> {{ order.paymentMethod }}</p>
                 <!-- <p [ngStyle]="{ 'color': order.status == 'Pending' ? 'orange' : 'green' }"><strong>status : {{order.status}}</strong></p> -->
             </div>
             <div class="ProductActionsContainer">
-                <button class="ActionButton color2" (click)="OpenStatusChangePopup(order.id)">{{order.status}} <img src="edit.svg" style="object-fit: cover; width:20px; height:20px; padding-left:10px;padding:1px 1px;" alt=""></button>
+                <button class="ActionButton color2" [style.background-color]="order.status === 'Pending' ? 'rgb(255, 96, 38)' : order.status === 'Delivered' ? 'rgb(21, 241, 168)' : 'rgb(16, 131, 255)'" (click)="OpenStatusChangePopup(order.id)">{{order.status}} <img src="edit.svg" style="object-fit: cover; width:20px; height:20px; padding-left:10px;padding:1px 1px;" alt=""></button>
             </div>
         </li>
         </ul>

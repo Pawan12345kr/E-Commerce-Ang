@@ -31,7 +31,7 @@ export const routes: Routes = [
     {path:'orderconfirm',component:OrderConfirmComponent},
     {path: 'order', component: OrderComponent},
     {path: 'profile', component: ProfileComponent},
-    {path : 'profileedit', component:ProfileEditComponent},
+    {path : 'profileEdit', component:ProfileEditComponent},
     {path : 'admin',
     component:DashboardComponent,
     children:[
@@ -73,10 +73,10 @@ export const routes: Routes = [
         },
         {
             path:'',
-            redirectTo:'admin',
+            redirectTo:'home',
             pathMatch:'full'
         }
     ]},
     // {path: 'product_detail',component:ProductdetailComponent},
-    // { path: '**', redirectTo: '' } 
+    { path: '**', redirectTo: '' } 
 ];

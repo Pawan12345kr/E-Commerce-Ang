@@ -6,15 +6,24 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
 export class OverviewComponent {
   TotalRevenue : any = 0;
-  FetchedOrders : any[] = [];
+  todayrevenue : any = 0;
+  // FetchedOrders : any[] = [];
   totalProduct : number = 0;
-  totalcategories : number = 0;
+  totalCategories : number = 0;
+  totalUsers : number = 0 ;
+  wholeresponse : any = [];
+
+  OrderStatus = {
+   pending : 0,
+   shipped : 0,
+   delivered : 0
+  }
 
   constructor(
     private authservice : AuthService,
@@ -23,42 +32,41 @@ export class OverviewComponent {
   {}
 
   ngOnInit(){
-    this.FetchAllOrders();
-    this.TotalProducts();
-    this.TotalCategories();
+    this.FetchAllDetails();
+    // this.calculateTodayRevenue();
+    // this.TotalProducts();
+    // this.TotalCategories();
   }
   
-  FetchAllOrders(){
+  FetchAllDetails(){
     const token = this.authservice.getToken();
-    const fetchallordersUrl = 'http://localhost:5156/api/Order/GetAllOrders'
-    this.http.get(fetchallordersUrl,{
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-        withCredentials: true 
-    }).subscribe((data:any) => {
-        console.log("Fetched all Orders : " ,data);
-        this.FetchedOrders = data;
-        this.CalculateRevenue();
+    this.http.get(`http://localhost:5156/api/Admin/GetAllEcommerceDetails/`,{
+      headers : token ? {Authorization : `Bearer ${token}`} : {},
+      withCredentials : true 
+    }).subscribe({
+      next : (resp : any) =>{
+        console.log(resp);
+        this.wholeresponse = resp;
+        this.totalProduct = resp.totalproduct;
+        this.totalCategories = resp.totalcategory;
+        this.totalUsers = resp.totalcustomer;
+        this.OrderStatus.pending = resp.pending;
+        this.OrderStatus.shipped = resp.shipping;
+        this.OrderStatus.delivered = resp.delivered;
+
+        this.calculaterevenue(resp.revenue);
+      },error : (error) =>{
+        console.log("Errorrrr : " ,error);
+      }
     })
   }
 
-  CalculateRevenue(){
-    console.log("calculaterevenue : ",this.FetchedOrders);
-    this.FetchedOrders.forEach((order =>{
-      this.TotalRevenue += order.totalPrice;
-    }))
-    console.log("Total reveneue : ",this.TotalRevenue);
-  }
-
-  TotalProducts(){
-    this.adminservice.GetAllProductsForAdmin().subscribe((data:any) => {
-      console.log("total products : ",data.length);
-      this.totalProduct = data.length;
-    })
-  }
-
-  TotalCategories(){
-    this.adminservice.GetAllCategoriesforAdmin().subscribe((data : any )=>{
-      this.totalcategories = data.length;
-    })
+  calculaterevenue(orders : any){
+      // console.log(orders);
+      orders.forEach((order : any)=>{
+        this.TotalRevenue += order.totalRevenue;
+      })
+      this.todayrevenue = orders[0].totalRevenue;
   }
 }
+

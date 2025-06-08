@@ -2,39 +2,43 @@
     <div class="SecondaryContainerOverview">
         <div class="OverviewBox">
             <span class="HeadingSpanContainer boldhead">Revenue</span>
-            <span class="ContentSpanBox">₹<p>{{TotalRevenue}}</p></span>
+            <span class="ContentSpanBox display">
+                <p id="TotalRevenue"> ₹{{TotalRevenue}}.00</p>
+            </span>
             <span class="ButtonSpanBox">
-                <button [routerLink]="['/admin/Orders/']">View all<img src="rightarrow.svg" style="padding-left:10px;" width="25px" height="25px" alt=""></button>
+                <p id="TodayRevenue"> Today : ₹{{todayrevenue}}.00</p>
             </span>
         </div>
-        
+
         <div class="OverviewBox">
             <span class="HeadingSpanContainer boldhead">Products</span>
-            <span class="ContentSpanBox greencolor">{{totalProduct}}</span>
-            <span class="ButtonSpanBox">
-                <button [routerLink]="['/admin/Products/']">View all<img src="rightarrow.svg" style="padding-left:10px;" width="25px" height="25px" alt=""></button>
+            <span class="ContentSpanBox greencolor">
+                <p id="TotalRevenue">
+                    {{totalProduct}}
+                </p>
             </span>
         </div>
         <div class="OverviewBox">
             <span class="HeadingSpanContainer">Categories</span>
-            <span class="ContentSpanBox greencolor">{{totalcategories}}</span>
-            <span class="ButtonSpanBox">
-                <button [routerLink]="['/admin/Categories/']">View all<img src="rightarrow.svg" style="padding-left:10px;" width="25px" height="25px" alt=""></button>
+            <span class="ContentSpanBox greencolor">
+                <p id="TotalRevenue">
+                    {{totalCategories}}
+                </p></span>
+        </div>
+        <div class="OverviewBox">
+            <span class="HeadingSpanContainer">Total Users</span>
+            <span class="ContentSpanBox">
+                <p id="TotalRevenue">
+                    {{totalUsers}}
+                </p></span>
+        </div>
+         <div class="OverviewBox">
+            <span class="HeadingSpanContainer border_bottom">Orders</span>
+            <span class="ContentSpanBox display">
+                <p class="Pending colorB">Pending : {{OrderStatus.pending}}</p>
+                <p class="Delivered colorC">Delivered : {{OrderStatus.delivered}}</p>
+                <p class="Shipped colorA">Shipped : {{OrderStatus.shipped}}</p>
             </span>
         </div>
-        <!-- <div class="OverviewBox">
-            <span class="HeadingSpanContainer">Total Reveneue</span>
-            <span class="ContentSpanBox">₹234567</span>
-            <span class="ButtonSpanBox">
-                <button>Button</button>
-            </span>
-        </div> -->
-         <!-- <div class="OverviewBox">
-            <span class="HeadingSpanContainer">Total Reveneue</span>
-            <span class="ContentSpanBox">₹234567</span>
-            <span class="ButtonSpanBox">
-                <button>Button</button>
-            </span>
-        </div> -->
     </div>
 </div>

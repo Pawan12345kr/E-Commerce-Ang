@@ -21,15 +21,22 @@ export class RegisterComponent {
       PhoneNumber = '';
       constructor(private authService: AuthService,
         private notification : NotificationService, private route: Router)
-      {
+      {}
+
+      get isValidPassword() {
+          return true;
       }
-      get isValidPassword(): boolean { return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.@#$%^&*!]).{6,}$/.test(this.password);
-      }
+      
+      // get isValidPassword(): boolean { 
+      //     return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.@#$%^&*!]).{6,}$/.test(this.password);
+      // }
       get isValidPincode(): boolean {
-        return /^[1-9][0-9]{5}$/.test(this.Pincode);
+        return true;
+        // return /^[1-9][0-9]{5}$/.test(this.Pincode);
       }
       get isValidPhoneNumber(): boolean {
-        return /^[6-9][0-9]{9}$/.test(this.PhoneNumber);
+        return true;
+        // return /^[6-9][0-9]{9}$/.test(this.PhoneNumber);
       }
       register()
       {

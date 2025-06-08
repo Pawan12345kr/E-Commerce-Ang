@@ -87,10 +87,8 @@ export class HomeComponent {
           this.AllProducts=products;
           console.log("All Products:",this.AllProducts);
           this.AllProducts.forEach(product => console.log(product));
-  })
-
+        })
         .catch(error => console.error('Error fetching products:', error));
-
   }
 
   addToCart(productId:number) {

@@ -233,3 +233,259 @@ header {
   border-radius: 0px 0px 10px 10px;
   overflow: hidden;
 }
+
+.Rootmenucontainer{
+  display: none;
+}
+
+@media (max-width : 900px) {
+  .HeaderContainerRoot{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: #000000;
+    z-index:1000;
+  }
+  header {
+      background-color: rgb(40, 40, 40); 
+      color: white;  
+      border-radius: 2px;
+      height: 80px;
+      padding-left: 20px;
+      position: relative;
+      /* padding: 10px 0px; */
+  }
+  .navbar{
+      position: absolute;
+      right:5px;
+      top: -3px;
+      bottom: 3px;
+      display:flex;
+      width: 70%;
+      justify-content: center;
+      align-items: center;
+      /* gap: 30px; */
+      flex-direction: row;
+  
+  }
+  .navContainer{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 10px;
+      gap: 5px;
+      height: 70px;
+      width: 100%;
+      border-radius: 20px;
+      /* background-color: rgb(36, 63, 37); */
+      margin-left: 10px;
+  
+  }
+
+  .LocationElement{
+    display: none;
+    font-size: 18px;
+    font-weight: 500;
+    width:40%;
+    /* background-color: blueviolet; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* background-color: rgb(31, 225, 102); */
+  }
+  
+  .refreshButton{
+    border: none;
+    background-color: transparent;
+    padding: 3px 3px;
+    transition: all 0.2s ease-in-out;
+    border-radius:20px;
+  }
+  
+  .refreshButton:hover{
+    transform: scale(0.95);
+  }
+  
+  .refreshButton:active{
+    transform: scale(0.95);
+  }
+  /*  */
+  
+  .SimpleButton{
+    border: none;
+    padding: 7px 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .SimpleButton:hover{
+    transform: scale(0.97);
+    text-decoration:underline;
+  }
+  
+  
+  .ButtonContainer{
+    display: none;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center;
+    gap: 5px; */
+  }
+  
+  .BtnColor1{
+    background-color: rgb(41, 41, 41);
+    color: white;
+  }
+  
+  .BtnColor2{
+    /* background-color: rgb(36, 36, 36); */
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+  }
+  .BtnColor3{
+    /* background-color: rgb(50, 50, 50); */
+    background-color: transparent;
+    color: white;
+    /* border: 1px solid grey; */
+  }
+  .BtnColor5{
+    background-color: transparent;
+    color: white;
+  }
+  
+  
+  
+  .cartimagecontainer{
+    padding: 2px 2px;
+    border-radius: 8px;
+    font-size: 18px;
+    width:70px;
+    height: 40px;
+    /* background-color: rgb(253, 253, 253); */
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .cartimagecontainer:hover{
+    transform: scale(0.97);
+  }
+  
+  .cartimagecontainer img{
+    width: 100%;
+    height: 100%;
+  }
+  
+
+/* burger menu  */
+  .Rootmenucontainer{
+    display: block;
+    /* width: 100px; */
+    margin-right: 0px;
+  }
+  .burger {
+    position: relative;
+    width: 30px;
+    height: 23px;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+  }
+  
+  .burger span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+  }
+  
+  .burger span:nth-of-type(1) {
+    top: 0px;
+    transform-origin: left center;
+  }
+  
+  .burger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left center;
+  }
+  
+  .burger span:nth-of-type(3) {
+    top: 100%;
+    transform-origin: left center;
+    transform: translateY(-100%);
+  }
+
+  .searchContainer{
+    width: 50%;
+    border-radius: 10px;
+    background-color: rgb(201, 33, 33);
+    position: relative;
+    border: 1px solid #000000;
+    margin-right: 20px;
+    /* overflow: hidden; */
+  }
+  
+  .SearchInputBox{
+    padding: 8px 10px;
+    border-radius: 10px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: rgb(255, 255, 255);
+  }
+  .SearchInputBox:focus{
+    /* border-radius: 10px 10px 0px 0px; */
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .SearchInputBox::selection{
+    border-radius: 10px;
+  }
+  
+  .searchResultsList{
+    position: absolute;
+    width: 300px;
+    top: 38px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;
+    overflow: hidden;
+  }
+  
+  .resultantproductspan{
+    padding: 10px 20px;
+    width: 100%;
+  }
+  
+  .resultantproductspan:hover{
+    background-color: aliceblue;
+  }
+  
+  .NoProductsFound{
+    padding: 10px 20px;
+    width: 100%;
+    position: absolute;
+    width: 300px;
+    top: 38px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;
+    overflow: hidden;
+  }
+   /*  */
+}
