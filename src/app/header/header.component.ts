@@ -21,10 +21,12 @@ export class HeaderComponent implements OnInit {
   searchTerm = '';
   NoProductsFound = false;
   IsAdmin = false;
+  menuStatus : boolean = false;
+
 
   constructor(private authService: AuthService, 
     private router: Router,
-  private notification : NotificationService) {}
+    private notification : NotificationService) {}
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
       this.isLoggedIn = true;
@@ -44,6 +46,16 @@ export class HeaderComponent implements OnInit {
       this.updateLocation(); 
     }
   }
+
+  toggleMenu() {
+    this.menuStatus = true;
+  }
+  
+  closemenu(){
+    this.menuStatus =false;
+  }
+
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

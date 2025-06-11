@@ -7,7 +7,6 @@ import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ProductdetailComponent } from './productdetail/productdetail.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { OverviewComponent } from './Admin/dashboard/overview/overview.component';
