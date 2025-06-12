@@ -31,7 +31,6 @@ export class OrderComponent {
   address: string = '';
   pincode: string = '';
   paymentMethod: string = '';
-  errorMessages = { address: '', pincode: '', paymentMethod: '' };
 
   constructor(private router: Router, private http: HttpClient, 
     private notification : NotificationService, private authService: AuthService) {}
@@ -52,6 +51,9 @@ export class OrderComponent {
       this.router.navigate(['/cart']);
       return;
     }
+
+    history.pushState(null, '', location.href);
+    window.onpopstate = () => history.pushState(null, '', location.href);
 
     this.loadUserAddress();
   }
@@ -80,20 +82,17 @@ export class OrderComponent {
   }
 
   placeOrder() {
-    this.errorMessages = { address: '', pincode: '', paymentMethod: '' };
-  
+    const pincodePattern = /^[1-9][0-9]{5}$/;
+
     if (!this.address.trim()) {
-      this.errorMessages.address = "Address is required.";
       this.notification.ShowMessage("Address is required.",'notify',3000);
       return;
     }
-    if (!this.pincode.trim()) {
-      this.errorMessages.pincode = "Pincode is required.";
+    if (!this.pincode.trim() || !pincodePattern.test(this.pincode)) {
       this.notification.ShowMessage("Pincode is required.",'notify',3000);
       return;
     }
     if (!this.paymentMethod.trim()) {
-      this.errorMessages.paymentMethod = "Please select a payment method.";
       this.notification.ShowMessage("Please select a payment method.",'notify',3000);
       return;
     }
@@ -111,7 +110,7 @@ export class OrderComponent {
         price: item.price
       }))
     };
-  
+    
     console.log("Order payload:", orderPayload);
   
     this.http.post("http://localhost:5156/api/Order/createorder", orderPayload, {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   searchTerm = '';
   NoProductsFound = false;
   IsAdmin = false;
-  menuStatus : boolean = false;
+  
 
 
   constructor(private authService: AuthService, 
@@ -47,13 +47,21 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  toggleMenu() {
-    this.menuStatus = true;
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event: any) {
+  //   if (window.innerWidth > 900) {
+  //     this.menuStatus = false; // Hide sidebar when screen size exceeds 900px
+  //   }
+  // }
+
+  menuStatus : boolean = false;
+  toggleMenu()  {
+    this.menuStatus = !this.menuStatus;
   }
   
-  closemenu(){
-    this.menuStatus =false;
-  }
+  // closemenu(){
+  //   this.menuStatus =false;
+  // }
 
 
   logout() {

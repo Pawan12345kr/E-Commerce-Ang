@@ -8,7 +8,7 @@ import { NotificationService } from '../services/notification.service';
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [CommonModule, FormsModule,RouterLink],
+  imports: [CommonModule, FormsModule,RouterLink,HeaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

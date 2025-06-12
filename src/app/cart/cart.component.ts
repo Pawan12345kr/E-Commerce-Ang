@@ -20,10 +20,10 @@ export class CartComponent {
   isLoggedIn: boolean = false;
 
   constructor(private authService: AuthService,
-     private http: HttpClient,
-      private router: Router ,
+      private http: HttpClient,
+      private router: Router,
+      private notification : NotificationService) {}
 
-    private notification : NotificationService) {}
 
   ngOnInit() {
     // this.isLoggedIn = this.authService.isAuthenticated(); 

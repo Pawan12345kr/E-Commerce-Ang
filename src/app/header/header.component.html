@@ -41,11 +41,11 @@
                     <span><img src="menu2.svg" alt="" height="30px" width="30px"></span>
                 </div>
                 <div class="menuBarContainer" [ngClass]="{'sidebar-visible': menuStatus, 'sidebar-hidden': !menuStatus}">
-                    <span>
+                    <!-- <span>
                         <button (click)="closemenu()" class="SimpleButton BtnColor1 widthfull">
                             close
                         </button>
-                    </span>
+                    </span> -->
                     <span>
                         <button *ngIf="!isLoggedIn" (click)="navigateToLogin()" class="SimpleButton BtnColor1 widthfull" title="login"> <img src="login1.svg" height="30px" width="35px" style="padding-right: 5px;" alt="">Login / Register</button>
                     </span>
