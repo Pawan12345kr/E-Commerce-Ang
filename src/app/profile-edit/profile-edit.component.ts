@@ -37,12 +37,6 @@ export class ProfileEditComponent {
           this.notification.ShowMessage("User details not found ",'warn',3000);
         }
       })
-
-      document.addEventListener("keydown",(event) => {
-        if(event.key === "Enter"){
-            this.updateUserInfo();
-        }
-      });
     }
     
     validateUserInfo(): boolean {

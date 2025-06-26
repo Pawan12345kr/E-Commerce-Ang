@@ -7,6 +7,7 @@ import { NotificationService } from './notification.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private loginUrl = 'http://localhost:5156/api/Account/login';
   private registerUrl = 'http://localhost:5156/api/Account/register/customer';

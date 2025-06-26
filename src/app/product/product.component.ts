@@ -7,9 +7,9 @@ import { HeaderComponent } from '../header/header.component';
 import { Injectable } from '@angular/core';
 import { NotificationService } from '../services/notification.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
 @Component({
   selector: 'app-product',
   imports: [CommonModule, HeaderComponent,RouterLink],
@@ -25,8 +25,8 @@ export class ProductComponent {
 
   constructor(
     private route: ActivatedRoute, 
-    private productService: ProductService, 
-    private authService: AuthService, 
+    private productService: ProductService,  
+    private authService : AuthService,
     private router: Router,
     private notification : NotificationService
   ) {}

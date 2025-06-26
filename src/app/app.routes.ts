@@ -18,6 +18,7 @@ import { AddCategoryComponent } from './Admin/dashboard/add-category/add-categor
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderConfirmComponent } from './order-confirm/order-confirm.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { adminGuardGuard } from './Admin/admin-guard.guard';
 export const routes: Routes = [
     { path: '', component: HomeComponent }, 
     {path: 'register', component: RegisterComponent},
@@ -35,6 +36,7 @@ export const routes: Routes = [
     
     {path : 'admin',
     component:DashboardComponent,
+    canActivate: [adminGuardGuard],
     children:[
         {
             path:'home',
